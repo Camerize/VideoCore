@@ -38,8 +38,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    _session = [[VCSimpleSession alloc] initWithVideoSize:CGSizeMake(1280, 720) frameRate:30 bitrate:1000000 useInterfaceOrientation:NO];
-    
+    _session = [[VCSimpleSession alloc] initWithVideoSize:CGSizeMake(1280, 720) frameRate:30 bitrate:1000000 useInterfaceOrientation:YES];
+
     [self.previewView addSubview:_session.previewView];
     _session.previewView.frame = self.previewView.bounds;
     _session.delegate = self;
@@ -66,7 +66,10 @@
         case VCSessionStatePreviewStarted:
         case VCSessionStateEnded:
         case VCSessionStateError:
-            [_session startRtmpSessionWithURL:@"rtmp://192.168.1.151/live" andStreamKey:@"myStream"];
+            //[_session startRtmpSessionWithURL:@"rtmp://ingest.showcaster.com/showcaster?sK=wiivMNAJIYA" andStreamKey:@"stream13482422132132014656"];
+            
+            [_session startRtmpSessionWithURL:@"rtmp://spllr.local:1935/live" andStreamKey:@"razi001"];
+
             break;
         default:
             [_session endRtmpSession];

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1A7B35651942542400AB5FD6 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7B35641942542400AB5FD6 /* GLKit.framework */; };
-		1A7B35671942564600AB5FD6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7B35661942564600AB5FD6 /* libPods.a */; };
 		7265D5E0191994B80042DC3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D5DF191994B80042DC3B /* Foundation.framework */; };
 		7265D5E2191994B80042DC3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D5E1191994B80042DC3B /* CoreGraphics.framework */; };
 		7265D5E4191994B80042DC3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D5E3191994B80042DC3B /* UIKit.framework */; };
@@ -18,30 +17,50 @@
 		7265D5F3191994B80042DC3B /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7265D5F1191994B80042DC3B /* Main_iPhone.storyboard */; };
 		7265D5F9191994B80042DC3B /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7265D5F8191994B80042DC3B /* ViewController.mm */; };
 		7265D5FB191994B80042DC3B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7265D5FA191994B80042DC3B /* Images.xcassets */; };
-		7265D602191994B80042DC3B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D601191994B80042DC3B /* XCTest.framework */; };
-		7265D603191994B80042DC3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D5DF191994B80042DC3B /* Foundation.framework */; };
-		7265D604191994B80042DC3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D5E3191994B80042DC3B /* UIKit.framework */; };
 		7265D6651919977B0042DC3B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D6641919977B0042DC3B /* AVFoundation.framework */; };
 		7265D667191997800042DC3B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D666191997800042DC3B /* AudioToolbox.framework */; };
 		7265D669191997840042DC3B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D668191997840042DC3B /* CFNetwork.framework */; };
 		7265D66B1919978E0042DC3B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D66A1919978E0042DC3B /* CoreMedia.framework */; };
 		7265D66D191997930042DC3B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D66C191997930042DC3B /* CoreVideo.framework */; };
 		7265D66F191997970042DC3B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7265D66E191997970042DC3B /* OpenGLES.framework */; };
+		E48439AB19D17DE9002466A2 /* UriCodec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48438E219D17DE9002466A2 /* UriCodec.cpp */; };
+		E48439AC19D17DE9002466A2 /* Pods-UriParser-cpp.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E48438E419D17DE9002466A2 /* Pods-UriParser-cpp.xcconfig */; };
+		E48439AD19D17DE9002466A2 /* Pods-UriParser-cpp-Private.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E48438E519D17DE9002466A2 /* Pods-UriParser-cpp-Private.xcconfig */; };
+		E48439AE19D17DE9002466A2 /* Pods-UriParser-cpp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E48438E619D17DE9002466A2 /* Pods-UriParser-cpp-dummy.m */; };
+		E48439C619D17DE9002466A2 /* Pods-boost.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E484392519D17DE9002466A2 /* Pods-boost.xcconfig */; };
+		E48439C719D17DE9002466A2 /* Pods-boost-Private.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E484392619D17DE9002466A2 /* Pods-boost-Private.xcconfig */; };
+		E48439C819D17DE9002466A2 /* Pods-boost-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E484392719D17DE9002466A2 /* Pods-boost-dummy.m */; };
+		E48439C919D17DE9002466A2 /* Pods-glm.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E48439A519D17DE9002466A2 /* Pods-glm.xcconfig */; };
+		E48439CA19D17DE9002466A2 /* Pods-glm-Private.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E48439A619D17DE9002466A2 /* Pods-glm-Private.xcconfig */; };
+		E48439CB19D17DE9002466A2 /* Pods-glm-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E48439A719D17DE9002466A2 /* Pods-glm-dummy.m */; };
+		E4843A0B19D17F14002466A2 /* AACEncode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439CC19D17F14002466A2 /* AACEncode.cpp */; };
+		E4843A0C19D17F14002466A2 /* AACPacketizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439CE19D17F14002466A2 /* AACPacketizer.cpp */; };
+		E4843A0D19D17F14002466A2 /* AspectTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439D019D17F14002466A2 /* AspectTransform.cpp */; };
+		E4843A0E19D17F14002466A2 /* AudioMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439D219D17F14002466A2 /* AudioMixer.cpp */; };
+		E4843A0F19D17F14002466A2 /* CameraSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = E48439D619D17F14002466A2 /* CameraSource.mm */; };
+		E4843A1019D17F14002466A2 /* GLESVideoMixer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E48439D919D17F14002466A2 /* GLESVideoMixer.mm */; };
+		E4843A1119D17F14002466A2 /* GenericAudioMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439DA19D17F14002466A2 /* GenericAudioMixer.cpp */; };
+		E4843A1219D17F14002466A2 /* Golomb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439DC19D17F14002466A2 /* Golomb.cpp */; };
+		E4843A1319D17F14002466A2 /* H264Encode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439DE19D17F14002466A2 /* H264Encode.cpp */; };
+		E4843A1419D17F14002466A2 /* H264Encode.mm in Sources */ = {isa = PBXBuildFile; fileRef = E48439E119D17F14002466A2 /* H264Encode.mm */; };
+		E4843A1519D17F14002466A2 /* H264Packetizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439E219D17F14002466A2 /* H264Packetizer.cpp */; };
+		E4843A1619D17F14002466A2 /* MP4Multiplexer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E48439F119D17F14002466A2 /* MP4Multiplexer.mm */; };
+		E4843A1719D17F14002466A2 /* MicSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = E48439F319D17F14002466A2 /* MicSource.mm */; };
+		E4843A1819D17F14002466A2 /* PixelBufferSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439F419D17F14002466A2 /* PixelBufferSource.cpp */; };
+		E4843A1919D17F14002466A2 /* PositionTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439F619D17F14002466A2 /* PositionTransform.cpp */; };
+		E4843A1A19D17F14002466A2 /* RTMPSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439F819D17F14002466A2 /* RTMPSession.cpp */; };
+		E4843A1B19D17F14002466A2 /* Split.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439FB19D17F14002466A2 /* Split.cpp */; };
+		E4843A1C19D17F14002466A2 /* StreamSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = E48439FE19D17F14002466A2 /* StreamSession.mm */; };
+		E4843A1D19D17F14002466A2 /* TCPThroughputAdaptation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48439FF19D17F14002466A2 /* TCPThroughputAdaptation.cpp */; };
+		E4843A1E19D17F14002466A2 /* VCPreviewView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4843A0219D17F14002466A2 /* VCPreviewView.mm */; };
+		E4843A1F19D17F14002466A2 /* VCSimpleSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4843A0419D17F14002466A2 /* VCSimpleSession.mm */; };
+		E4843A2019D17F14002466A2 /* Pods-VideoCore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E4843A0519D17F14002466A2 /* Pods-VideoCore.xcconfig */; };
+		E4843A2119D17F14002466A2 /* Pods-VideoCore-Private.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E4843A0619D17F14002466A2 /* Pods-VideoCore-Private.xcconfig */; };
+		E4843A2219D17F14002466A2 /* Pods-VideoCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4843A0719D17F14002466A2 /* Pods-VideoCore-dummy.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7265D605191994B80042DC3B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7265D5D4191994B80042DC3B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7265D5DB191994B80042DC3B;
-			remoteInfo = SampleBroadcaster;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1A7B35641942542400AB5FD6 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		1A7B35661942564600AB5FD6 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		7265D5DC191994B80042DC3B /* SampleBroadcaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleBroadcaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7265D5DF191994B80042DC3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7265D5E1191994B80042DC3B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -56,7 +75,6 @@
 		7265D5F7191994B80042DC3B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		7265D5F8191994B80042DC3B /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		7265D5FA191994B80042DC3B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7265D600191994B80042DC3B /* SampleBroadcasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleBroadcasterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7265D601191994B80042DC3B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7265D6641919977B0042DC3B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7265D666191997800042DC3B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -65,7 +83,203 @@
 		7265D66C191997930042DC3B /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		7265D66E191997970042DC3B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		89C13C05AD1E4151BD6AB5C7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		D811EF3F24704EBFB916513B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E48438E219D17DE9002466A2 /* UriCodec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UriCodec.cpp; sourceTree = "<group>"; };
+		E48438E319D17DE9002466A2 /* UriParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UriParser.hpp; sourceTree = "<group>"; };
+		E48438E419D17DE9002466A2 /* Pods-UriParser-cpp.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Pods-UriParser-cpp.xcconfig"; sourceTree = "<group>"; };
+		E48438E519D17DE9002466A2 /* Pods-UriParser-cpp-Private.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Pods-UriParser-cpp-Private.xcconfig"; sourceTree = "<group>"; };
+		E48438E619D17DE9002466A2 /* Pods-UriParser-cpp-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pods-UriParser-cpp-dummy.m"; sourceTree = "<group>"; };
+		E48438E719D17DE9002466A2 /* Pods-UriParser-cpp-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pods-UriParser-cpp-prefix.pch"; sourceTree = "<group>"; };
+		E484392519D17DE9002466A2 /* Pods-boost.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Pods-boost.xcconfig"; sourceTree = "<group>"; };
+		E484392619D17DE9002466A2 /* Pods-boost-Private.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Pods-boost-Private.xcconfig"; sourceTree = "<group>"; };
+		E484392719D17DE9002466A2 /* Pods-boost-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pods-boost-dummy.m"; sourceTree = "<group>"; };
+		E484392819D17DE9002466A2 /* Pods-boost-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pods-boost-prefix.pch"; sourceTree = "<group>"; };
+		E484392B19D17DE9002466A2 /* _detail.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = _detail.hpp; path = glm/core/_detail.hpp; sourceTree = "<group>"; };
+		E484392C19D17DE9002466A2 /* _fixes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = _fixes.hpp; path = glm/core/_fixes.hpp; sourceTree = "<group>"; };
+		E484392D19D17DE9002466A2 /* _swizzle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = _swizzle.hpp; path = glm/core/_swizzle.hpp; sourceTree = "<group>"; };
+		E484392E19D17DE9002466A2 /* _swizzle_func.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = _swizzle_func.hpp; path = glm/core/_swizzle_func.hpp; sourceTree = "<group>"; };
+		E484392F19D17DE9002466A2 /* _vectorize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = _vectorize.hpp; path = glm/core/_vectorize.hpp; sourceTree = "<group>"; };
+		E484393019D17DE9002466A2 /* associated_min_max.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = associated_min_max.hpp; path = glm/gtx/associated_min_max.hpp; sourceTree = "<group>"; };
+		E484393119D17DE9002466A2 /* bit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bit.hpp; path = glm/gtx/bit.hpp; sourceTree = "<group>"; };
+		E484393219D17DE9002466A2 /* closest_point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = closest_point.hpp; path = glm/gtx/closest_point.hpp; sourceTree = "<group>"; };
+		E484393319D17DE9002466A2 /* color_cast.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = color_cast.hpp; path = glm/gtx/color_cast.hpp; sourceTree = "<group>"; };
+		E484393419D17DE9002466A2 /* color_space.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = color_space.hpp; path = glm/gtx/color_space.hpp; sourceTree = "<group>"; };
+		E484393519D17DE9002466A2 /* color_space_YCoCg.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = color_space_YCoCg.hpp; path = glm/gtx/color_space_YCoCg.hpp; sourceTree = "<group>"; };
+		E484393619D17DE9002466A2 /* compatibility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = compatibility.hpp; path = glm/gtx/compatibility.hpp; sourceTree = "<group>"; };
+		E484393719D17DE9002466A2 /* component_wise.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = component_wise.hpp; path = glm/gtx/component_wise.hpp; sourceTree = "<group>"; };
+		E484393819D17DE9002466A2 /* constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = constants.hpp; path = glm/gtx/constants.hpp; sourceTree = "<group>"; };
+		E484393919D17DE9002466A2 /* constants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = constants.hpp; path = glm/gtc/constants.hpp; sourceTree = "<group>"; };
+		E484393A19D17DE9002466A2 /* epsilon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = epsilon.hpp; path = glm/gtc/epsilon.hpp; sourceTree = "<group>"; };
+		E484393B19D17DE9002466A2 /* epsilon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = epsilon.hpp; path = glm/gtx/epsilon.hpp; sourceTree = "<group>"; };
+		E484393C19D17DE9002466A2 /* euler_angles.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = euler_angles.hpp; path = glm/gtx/euler_angles.hpp; sourceTree = "<group>"; };
+		E484393D19D17DE9002466A2 /* ext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ext.hpp; path = glm/ext.hpp; sourceTree = "<group>"; };
+		E484393E19D17DE9002466A2 /* extend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = extend.hpp; path = glm/gtx/extend.hpp; sourceTree = "<group>"; };
+		E484393F19D17DE9002466A2 /* extented_min_max.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = extented_min_max.hpp; path = glm/gtx/extented_min_max.hpp; sourceTree = "<group>"; };
+		E484394019D17DE9002466A2 /* fast_exponential.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fast_exponential.hpp; path = glm/gtx/fast_exponential.hpp; sourceTree = "<group>"; };
+		E484394119D17DE9002466A2 /* fast_square_root.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fast_square_root.hpp; path = glm/gtx/fast_square_root.hpp; sourceTree = "<group>"; };
+		E484394219D17DE9002466A2 /* fast_trigonometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fast_trigonometry.hpp; path = glm/gtx/fast_trigonometry.hpp; sourceTree = "<group>"; };
+		E484394319D17DE9002466A2 /* func_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = func_common.hpp; path = glm/core/func_common.hpp; sourceTree = "<group>"; };
+		E484394419D17DE9002466A2 /* func_exponential.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = func_exponential.hpp; path = glm/core/func_exponential.hpp; sourceTree = "<group>"; };
+		E484394519D17DE9002466A2 /* func_geometric.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = func_geometric.hpp; path = glm/core/func_geometric.hpp; sourceTree = "<group>"; };
+		E484394619D17DE9002466A2 /* func_integer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = func_integer.hpp; path = glm/core/func_integer.hpp; sourceTree = "<group>"; };
+		E484394719D17DE9002466A2 /* func_matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = func_matrix.hpp; path = glm/core/func_matrix.hpp; sourceTree = "<group>"; };
+		E484394819D17DE9002466A2 /* func_noise.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = func_noise.hpp; path = glm/core/func_noise.hpp; sourceTree = "<group>"; };
+		E484394919D17DE9002466A2 /* func_packing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = func_packing.hpp; path = glm/core/func_packing.hpp; sourceTree = "<group>"; };
+		E484394A19D17DE9002466A2 /* func_trigonometric.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = func_trigonometric.hpp; path = glm/core/func_trigonometric.hpp; sourceTree = "<group>"; };
+		E484394B19D17DE9002466A2 /* func_vector_relational.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = func_vector_relational.hpp; path = glm/core/func_vector_relational.hpp; sourceTree = "<group>"; };
+		E484394C19D17DE9002466A2 /* glm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = glm.hpp; path = glm/glm.hpp; sourceTree = "<group>"; };
+		E484394D19D17DE9002466A2 /* gradient_paint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = gradient_paint.hpp; path = glm/gtx/gradient_paint.hpp; sourceTree = "<group>"; };
+		E484394E19D17DE9002466A2 /* half_float.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = half_float.hpp; path = glm/gtc/half_float.hpp; sourceTree = "<group>"; };
+		E484394F19D17DE9002466A2 /* handed_coordinate_space.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = handed_coordinate_space.hpp; path = glm/gtx/handed_coordinate_space.hpp; sourceTree = "<group>"; };
+		E484395019D17DE9002466A2 /* hint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = hint.hpp; path = glm/core/hint.hpp; sourceTree = "<group>"; };
+		E484395119D17DE9002466A2 /* inertia.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = inertia.hpp; path = glm/gtx/inertia.hpp; sourceTree = "<group>"; };
+		E484395219D17DE9002466A2 /* int_10_10_10_2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = int_10_10_10_2.hpp; path = glm/gtx/int_10_10_10_2.hpp; sourceTree = "<group>"; };
+		E484395319D17DE9002466A2 /* integer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = integer.hpp; path = glm/gtx/integer.hpp; sourceTree = "<group>"; };
+		E484395419D17DE9002466A2 /* intersect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = intersect.hpp; path = glm/gtx/intersect.hpp; sourceTree = "<group>"; };
+		E484395519D17DE9002466A2 /* intrinsic_common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = intrinsic_common.hpp; path = glm/core/intrinsic_common.hpp; sourceTree = "<group>"; };
+		E484395619D17DE9002466A2 /* intrinsic_exponential.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = intrinsic_exponential.hpp; path = glm/core/intrinsic_exponential.hpp; sourceTree = "<group>"; };
+		E484395719D17DE9002466A2 /* intrinsic_geometric.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = intrinsic_geometric.hpp; path = glm/core/intrinsic_geometric.hpp; sourceTree = "<group>"; };
+		E484395819D17DE9002466A2 /* intrinsic_matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = intrinsic_matrix.hpp; path = glm/core/intrinsic_matrix.hpp; sourceTree = "<group>"; };
+		E484395919D17DE9002466A2 /* intrinsic_trigonometric.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = intrinsic_trigonometric.hpp; path = glm/core/intrinsic_trigonometric.hpp; sourceTree = "<group>"; };
+		E484395A19D17DE9002466A2 /* intrinsic_vector_relational.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = intrinsic_vector_relational.hpp; path = glm/core/intrinsic_vector_relational.hpp; sourceTree = "<group>"; };
+		E484395B19D17DE9002466A2 /* log_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = log_base.hpp; path = glm/gtx/log_base.hpp; sourceTree = "<group>"; };
+		E484395C19D17DE9002466A2 /* matrix_access.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix_access.hpp; path = glm/gtc/matrix_access.hpp; sourceTree = "<group>"; };
+		E484395D19D17DE9002466A2 /* matrix_cross_product.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix_cross_product.hpp; path = glm/gtx/matrix_cross_product.hpp; sourceTree = "<group>"; };
+		E484395E19D17DE9002466A2 /* matrix_integer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix_integer.hpp; path = glm/gtc/matrix_integer.hpp; sourceTree = "<group>"; };
+		E484395F19D17DE9002466A2 /* matrix_interpolation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix_interpolation.hpp; path = glm/gtx/matrix_interpolation.hpp; sourceTree = "<group>"; };
+		E484396019D17DE9002466A2 /* matrix_inverse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix_inverse.hpp; path = glm/gtc/matrix_inverse.hpp; sourceTree = "<group>"; };
+		E484396119D17DE9002466A2 /* matrix_major_storage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix_major_storage.hpp; path = glm/gtx/matrix_major_storage.hpp; sourceTree = "<group>"; };
+		E484396219D17DE9002466A2 /* matrix_operation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix_operation.hpp; path = glm/gtx/matrix_operation.hpp; sourceTree = "<group>"; };
+		E484396319D17DE9002466A2 /* matrix_query.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix_query.hpp; path = glm/gtx/matrix_query.hpp; sourceTree = "<group>"; };
+		E484396419D17DE9002466A2 /* matrix_transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix_transform.hpp; path = glm/gtc/matrix_transform.hpp; sourceTree = "<group>"; };
+		E484396519D17DE9002466A2 /* mixed_product.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = mixed_product.hpp; path = glm/gtx/mixed_product.hpp; sourceTree = "<group>"; };
+		E484396619D17DE9002466A2 /* multiple.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = multiple.hpp; path = glm/gtx/multiple.hpp; sourceTree = "<group>"; };
+		E484396719D17DE9002466A2 /* noise.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = noise.hpp; path = glm/gtx/noise.hpp; sourceTree = "<group>"; };
+		E484396819D17DE9002466A2 /* noise.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = noise.hpp; path = glm/gtc/noise.hpp; sourceTree = "<group>"; };
+		E484396919D17DE9002466A2 /* norm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = norm.hpp; path = glm/gtx/norm.hpp; sourceTree = "<group>"; };
+		E484396A19D17DE9002466A2 /* normal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = normal.hpp; path = glm/gtx/normal.hpp; sourceTree = "<group>"; };
+		E484396B19D17DE9002466A2 /* normalize_dot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = normalize_dot.hpp; path = glm/gtx/normalize_dot.hpp; sourceTree = "<group>"; };
+		E484396C19D17DE9002466A2 /* number_precision.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = number_precision.hpp; path = glm/gtx/number_precision.hpp; sourceTree = "<group>"; };
+		E484396D19D17DE9002466A2 /* ocl_type.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ocl_type.hpp; path = glm/gtx/ocl_type.hpp; sourceTree = "<group>"; };
+		E484396E19D17DE9002466A2 /* optimum_pow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = optimum_pow.hpp; path = glm/gtx/optimum_pow.hpp; sourceTree = "<group>"; };
+		E484396F19D17DE9002466A2 /* orthonormalize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = orthonormalize.hpp; path = glm/gtx/orthonormalize.hpp; sourceTree = "<group>"; };
+		E484397019D17DE9002466A2 /* perpendicular.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = perpendicular.hpp; path = glm/gtx/perpendicular.hpp; sourceTree = "<group>"; };
+		E484397119D17DE9002466A2 /* polar_coordinates.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = polar_coordinates.hpp; path = glm/gtx/polar_coordinates.hpp; sourceTree = "<group>"; };
+		E484397219D17DE9002466A2 /* projection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = projection.hpp; path = glm/gtx/projection.hpp; sourceTree = "<group>"; };
+		E484397319D17DE9002466A2 /* quaternion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = quaternion.hpp; path = glm/gtc/quaternion.hpp; sourceTree = "<group>"; };
+		E484397419D17DE9002466A2 /* quaternion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = quaternion.hpp; path = glm/gtx/quaternion.hpp; sourceTree = "<group>"; };
+		E484397519D17DE9002466A2 /* random.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = random.hpp; path = glm/gtc/random.hpp; sourceTree = "<group>"; };
+		E484397619D17DE9002466A2 /* random.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = random.hpp; path = glm/gtx/random.hpp; sourceTree = "<group>"; };
+		E484397719D17DE9002466A2 /* raw_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = raw_data.hpp; path = glm/gtx/raw_data.hpp; sourceTree = "<group>"; };
+		E484397819D17DE9002466A2 /* reciprocal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = reciprocal.hpp; path = glm/gtx/reciprocal.hpp; sourceTree = "<group>"; };
+		E484397919D17DE9002466A2 /* reciprocal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = reciprocal.hpp; path = glm/gtc/reciprocal.hpp; sourceTree = "<group>"; };
+		E484397A19D17DE9002466A2 /* rotate_vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = rotate_vector.hpp; path = glm/gtx/rotate_vector.hpp; sourceTree = "<group>"; };
+		E484397B19D17DE9002466A2 /* setup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = setup.hpp; path = glm/core/setup.hpp; sourceTree = "<group>"; };
+		E484397C19D17DE9002466A2 /* simd_mat4.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = simd_mat4.hpp; path = glm/gtx/simd_mat4.hpp; sourceTree = "<group>"; };
+		E484397D19D17DE9002466A2 /* simd_vec4.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = simd_vec4.hpp; path = glm/gtx/simd_vec4.hpp; sourceTree = "<group>"; };
+		E484397E19D17DE9002466A2 /* spline.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = spline.hpp; path = glm/gtx/spline.hpp; sourceTree = "<group>"; };
+		E484397F19D17DE9002466A2 /* std_based_type.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = std_based_type.hpp; path = glm/gtx/std_based_type.hpp; sourceTree = "<group>"; };
+		E484398019D17DE9002466A2 /* string_cast.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = string_cast.hpp; path = glm/gtx/string_cast.hpp; sourceTree = "<group>"; };
+		E484398119D17DE9002466A2 /* swizzle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = swizzle.hpp; path = glm/gtc/swizzle.hpp; sourceTree = "<group>"; };
+		E484398219D17DE9002466A2 /* transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = transform.hpp; path = glm/gtx/transform.hpp; sourceTree = "<group>"; };
+		E484398319D17DE9002466A2 /* transform2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = transform2.hpp; path = glm/gtx/transform2.hpp; sourceTree = "<group>"; };
+		E484398419D17DE9002466A2 /* type.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type.hpp; path = glm/core/type.hpp; sourceTree = "<group>"; };
+		E484398519D17DE9002466A2 /* type_float.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_float.hpp; path = glm/core/type_float.hpp; sourceTree = "<group>"; };
+		E484398619D17DE9002466A2 /* type_gentype.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_gentype.hpp; path = glm/core/type_gentype.hpp; sourceTree = "<group>"; };
+		E484398719D17DE9002466A2 /* type_half.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_half.hpp; path = glm/core/type_half.hpp; sourceTree = "<group>"; };
+		E484398819D17DE9002466A2 /* type_int.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_int.hpp; path = glm/core/type_int.hpp; sourceTree = "<group>"; };
+		E484398919D17DE9002466A2 /* type_mat.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat.hpp; path = glm/core/type_mat.hpp; sourceTree = "<group>"; };
+		E484398A19D17DE9002466A2 /* type_mat2x2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat2x2.hpp; path = glm/core/type_mat2x2.hpp; sourceTree = "<group>"; };
+		E484398B19D17DE9002466A2 /* type_mat2x3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat2x3.hpp; path = glm/core/type_mat2x3.hpp; sourceTree = "<group>"; };
+		E484398C19D17DE9002466A2 /* type_mat2x4.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat2x4.hpp; path = glm/core/type_mat2x4.hpp; sourceTree = "<group>"; };
+		E484398D19D17DE9002466A2 /* type_mat3x2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat3x2.hpp; path = glm/core/type_mat3x2.hpp; sourceTree = "<group>"; };
+		E484398E19D17DE9002466A2 /* type_mat3x3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat3x3.hpp; path = glm/core/type_mat3x3.hpp; sourceTree = "<group>"; };
+		E484398F19D17DE9002466A2 /* type_mat3x4.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat3x4.hpp; path = glm/core/type_mat3x4.hpp; sourceTree = "<group>"; };
+		E484399019D17DE9002466A2 /* type_mat4x2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat4x2.hpp; path = glm/core/type_mat4x2.hpp; sourceTree = "<group>"; };
+		E484399119D17DE9002466A2 /* type_mat4x3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat4x3.hpp; path = glm/core/type_mat4x3.hpp; sourceTree = "<group>"; };
+		E484399219D17DE9002466A2 /* type_mat4x4.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_mat4x4.hpp; path = glm/core/type_mat4x4.hpp; sourceTree = "<group>"; };
+		E484399319D17DE9002466A2 /* type_precision.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_precision.hpp; path = glm/gtc/type_precision.hpp; sourceTree = "<group>"; };
+		E484399419D17DE9002466A2 /* type_ptr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_ptr.hpp; path = glm/gtc/type_ptr.hpp; sourceTree = "<group>"; };
+		E484399519D17DE9002466A2 /* type_size.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_size.hpp; path = glm/core/type_size.hpp; sourceTree = "<group>"; };
+		E484399619D17DE9002466A2 /* type_vec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_vec.hpp; path = glm/core/type_vec.hpp; sourceTree = "<group>"; };
+		E484399719D17DE9002466A2 /* type_vec1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_vec1.hpp; path = glm/core/type_vec1.hpp; sourceTree = "<group>"; };
+		E484399819D17DE9002466A2 /* type_vec2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_vec2.hpp; path = glm/core/type_vec2.hpp; sourceTree = "<group>"; };
+		E484399919D17DE9002466A2 /* type_vec3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_vec3.hpp; path = glm/core/type_vec3.hpp; sourceTree = "<group>"; };
+		E484399A19D17DE9002466A2 /* type_vec4.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = type_vec4.hpp; path = glm/core/type_vec4.hpp; sourceTree = "<group>"; };
+		E484399B19D17DE9002466A2 /* ulp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ulp.hpp; path = glm/gtc/ulp.hpp; sourceTree = "<group>"; };
+		E484399C19D17DE9002466A2 /* ulp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ulp.hpp; path = glm/gtx/ulp.hpp; sourceTree = "<group>"; };
+		E484399D19D17DE9002466A2 /* unsigned_int.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = unsigned_int.hpp; path = glm/gtx/unsigned_int.hpp; sourceTree = "<group>"; };
+		E484399E19D17DE9002466A2 /* vec1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = vec1.hpp; path = glm/gtx/vec1.hpp; sourceTree = "<group>"; };
+		E484399F19D17DE9002466A2 /* vector_access.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = vector_access.hpp; path = glm/gtx/vector_access.hpp; sourceTree = "<group>"; };
+		E48439A019D17DE9002466A2 /* vector_angle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = vector_angle.hpp; path = glm/gtx/vector_angle.hpp; sourceTree = "<group>"; };
+		E48439A119D17DE9002466A2 /* vector_query.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = vector_query.hpp; path = glm/gtx/vector_query.hpp; sourceTree = "<group>"; };
+		E48439A219D17DE9002466A2 /* verbose_operator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = verbose_operator.hpp; path = glm/gtx/verbose_operator.hpp; sourceTree = "<group>"; };
+		E48439A319D17DE9002466A2 /* wrap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = wrap.hpp; path = glm/gtx/wrap.hpp; sourceTree = "<group>"; };
+		E48439A419D17DE9002466A2 /* xstream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = xstream.hpp; path = glm/virtrev/xstream.hpp; sourceTree = "<group>"; };
+		E48439A519D17DE9002466A2 /* Pods-glm.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Pods-glm.xcconfig"; sourceTree = "<group>"; };
+		E48439A619D17DE9002466A2 /* Pods-glm-Private.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Pods-glm-Private.xcconfig"; sourceTree = "<group>"; };
+		E48439A719D17DE9002466A2 /* Pods-glm-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pods-glm-dummy.m"; sourceTree = "<group>"; };
+		E48439A819D17DE9002466A2 /* Pods-glm-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pods-glm-prefix.pch"; sourceTree = "<group>"; };
+		E48439CC19D17F14002466A2 /* AACEncode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AACEncode.cpp; path = transforms/iOS/AACEncode.cpp; sourceTree = "<group>"; };
+		E48439CD19D17F14002466A2 /* AACEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AACEncode.h; path = transforms/iOS/AACEncode.h; sourceTree = "<group>"; };
+		E48439CE19D17F14002466A2 /* AACPacketizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AACPacketizer.cpp; path = transforms/RTMP/AACPacketizer.cpp; sourceTree = "<group>"; };
+		E48439CF19D17F14002466A2 /* AACPacketizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AACPacketizer.h; path = transforms/RTMP/AACPacketizer.h; sourceTree = "<group>"; };
+		E48439D019D17F14002466A2 /* AspectTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AspectTransform.cpp; path = transforms/AspectTransform.cpp; sourceTree = "<group>"; };
+		E48439D119D17F14002466A2 /* AspectTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AspectTransform.h; path = transforms/AspectTransform.h; sourceTree = "<group>"; };
+		E48439D219D17F14002466A2 /* AudioMixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioMixer.cpp; path = mixers/Apple/AudioMixer.cpp; sourceTree = "<group>"; };
+		E48439D319D17F14002466A2 /* AudioMixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioMixer.h; path = mixers/Apple/AudioMixer.h; sourceTree = "<group>"; };
+		E48439D419D17F14002466A2 /* Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Buffer.hpp; path = system/Buffer.hpp; sourceTree = "<group>"; };
+		E48439D519D17F14002466A2 /* CameraSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraSource.h; path = sources/iOS/CameraSource.h; sourceTree = "<group>"; };
+		E48439D619D17F14002466A2 /* CameraSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CameraSource.mm; path = sources/iOS/CameraSource.mm; sourceTree = "<group>"; };
+		E48439D719D17F14002466A2 /* GLESUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLESUtil.h; path = sources/iOS/GLESUtil.h; sourceTree = "<group>"; };
+		E48439D819D17F14002466A2 /* GLESVideoMixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLESVideoMixer.h; path = mixers/iOS/GLESVideoMixer.h; sourceTree = "<group>"; };
+		E48439D919D17F14002466A2 /* GLESVideoMixer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLESVideoMixer.mm; path = mixers/iOS/GLESVideoMixer.mm; sourceTree = "<group>"; };
+		E48439DA19D17F14002466A2 /* GenericAudioMixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericAudioMixer.cpp; path = mixers/GenericAudioMixer.cpp; sourceTree = "<group>"; };
+		E48439DB19D17F14002466A2 /* GenericAudioMixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericAudioMixer.h; path = mixers/GenericAudioMixer.h; sourceTree = "<group>"; };
+		E48439DC19D17F14002466A2 /* Golomb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Golomb.cpp; path = system/h264/Golomb.cpp; sourceTree = "<group>"; };
+		E48439DD19D17F14002466A2 /* Golomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Golomb.h; path = system/h264/Golomb.h; sourceTree = "<group>"; };
+		E48439DE19D17F14002466A2 /* H264Encode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = H264Encode.cpp; path = transforms/Apple/H264Encode.cpp; sourceTree = "<group>"; };
+		E48439DF19D17F14002466A2 /* H264Encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = H264Encode.h; path = transforms/Apple/H264Encode.h; sourceTree = "<group>"; };
+		E48439E019D17F14002466A2 /* H264Encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = H264Encode.h; path = transforms/iOS/H264Encode.h; sourceTree = "<group>"; };
+		E48439E119D17F14002466A2 /* H264Encode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = H264Encode.mm; path = transforms/iOS/H264Encode.mm; sourceTree = "<group>"; };
+		E48439E219D17F14002466A2 /* H264Packetizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = H264Packetizer.cpp; path = transforms/RTMP/H264Packetizer.cpp; sourceTree = "<group>"; };
+		E48439E319D17F14002466A2 /* H264Packetizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = H264Packetizer.h; path = transforms/RTMP/H264Packetizer.h; sourceTree = "<group>"; };
+		E48439E419D17F14002466A2 /* IAudioMixer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IAudioMixer.hpp; path = mixers/IAudioMixer.hpp; sourceTree = "<group>"; };
+		E48439E519D17F14002466A2 /* IEncoder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IEncoder.hpp; path = transforms/IEncoder.hpp; sourceTree = "<group>"; };
+		E48439E619D17F14002466A2 /* IMetaData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IMetaData.hpp; path = transforms/IMetaData.hpp; sourceTree = "<group>"; };
+		E48439E719D17F14002466A2 /* IMixer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IMixer.hpp; path = mixers/IMixer.hpp; sourceTree = "<group>"; };
+		E48439E819D17F14002466A2 /* IOutput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IOutput.hpp; path = transforms/IOutput.hpp; sourceTree = "<group>"; };
+		E48439E919D17F14002466A2 /* IOutputSession.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IOutputSession.hpp; path = transforms/IOutputSession.hpp; sourceTree = "<group>"; };
+		E48439EA19D17F14002466A2 /* ISource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ISource.hpp; path = sources/ISource.hpp; sourceTree = "<group>"; };
+		E48439EB19D17F14002466A2 /* IStreamSession.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IStreamSession.hpp; path = stream/IStreamSession.hpp; sourceTree = "<group>"; };
+		E48439EC19D17F14002466A2 /* IThroughputAdaptation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IThroughputAdaptation.h; path = stream/IThroughputAdaptation.h; sourceTree = "<group>"; };
+		E48439ED19D17F14002466A2 /* ITransform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ITransform.hpp; path = transforms/ITransform.hpp; sourceTree = "<group>"; };
+		E48439EE19D17F14002466A2 /* IVideoMixer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IVideoMixer.hpp; path = mixers/IVideoMixer.hpp; sourceTree = "<group>"; };
+		E48439EF19D17F14002466A2 /* JobQueue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JobQueue.hpp; path = system/JobQueue.hpp; sourceTree = "<group>"; };
+		E48439F019D17F14002466A2 /* MP4Multiplexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MP4Multiplexer.h; path = transforms/Apple/MP4Multiplexer.h; sourceTree = "<group>"; };
+		E48439F119D17F14002466A2 /* MP4Multiplexer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MP4Multiplexer.mm; path = transforms/Apple/MP4Multiplexer.mm; sourceTree = "<group>"; };
+		E48439F219D17F14002466A2 /* MicSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MicSource.h; path = sources/iOS/MicSource.h; sourceTree = "<group>"; };
+		E48439F319D17F14002466A2 /* MicSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MicSource.mm; path = sources/iOS/MicSource.mm; sourceTree = "<group>"; };
+		E48439F419D17F14002466A2 /* PixelBufferSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PixelBufferSource.cpp; path = sources/Apple/PixelBufferSource.cpp; sourceTree = "<group>"; };
+		E48439F519D17F14002466A2 /* PixelBufferSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PixelBufferSource.h; path = sources/Apple/PixelBufferSource.h; sourceTree = "<group>"; };
+		E48439F619D17F14002466A2 /* PositionTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PositionTransform.cpp; path = transforms/PositionTransform.cpp; sourceTree = "<group>"; };
+		E48439F719D17F14002466A2 /* PositionTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PositionTransform.h; path = transforms/PositionTransform.h; sourceTree = "<group>"; };
+		E48439F819D17F14002466A2 /* RTMPSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RTMPSession.cpp; path = rtmp/RTMPSession.cpp; sourceTree = "<group>"; };
+		E48439F919D17F14002466A2 /* RTMPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RTMPSession.h; path = rtmp/RTMPSession.h; sourceTree = "<group>"; };
+		E48439FA19D17F14002466A2 /* RTMPTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RTMPTypes.h; path = rtmp/RTMPTypes.h; sourceTree = "<group>"; };
+		E48439FB19D17F14002466A2 /* Split.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Split.cpp; path = transforms/Split.cpp; sourceTree = "<group>"; };
+		E48439FC19D17F14002466A2 /* Split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Split.h; path = transforms/Split.h; sourceTree = "<group>"; };
+		E48439FD19D17F14002466A2 /* StreamSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamSession.h; path = stream/Apple/StreamSession.h; sourceTree = "<group>"; };
+		E48439FE19D17F14002466A2 /* StreamSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = StreamSession.mm; path = stream/Apple/StreamSession.mm; sourceTree = "<group>"; };
+		E48439FF19D17F14002466A2 /* TCPThroughputAdaptation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TCPThroughputAdaptation.cpp; path = stream/TCPThroughputAdaptation.cpp; sourceTree = "<group>"; };
+		E4843A0019D17F14002466A2 /* TCPThroughputAdaptation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCPThroughputAdaptation.h; path = stream/TCPThroughputAdaptation.h; sourceTree = "<group>"; };
+		E4843A0119D17F14002466A2 /* VCPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VCPreviewView.h; path = api/iOS/VCPreviewView.h; sourceTree = "<group>"; };
+		E4843A0219D17F14002466A2 /* VCPreviewView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VCPreviewView.mm; path = api/iOS/VCPreviewView.mm; sourceTree = "<group>"; };
+		E4843A0319D17F14002466A2 /* VCSimpleSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VCSimpleSession.h; path = api/iOS/VCSimpleSession.h; sourceTree = "<group>"; };
+		E4843A0419D17F14002466A2 /* VCSimpleSession.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VCSimpleSession.mm; path = api/iOS/VCSimpleSession.mm; sourceTree = "<group>"; };
+		E4843A0519D17F14002466A2 /* Pods-VideoCore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Pods-VideoCore.xcconfig"; sourceTree = "<group>"; };
+		E4843A0619D17F14002466A2 /* Pods-VideoCore-Private.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Pods-VideoCore-Private.xcconfig"; sourceTree = "<group>"; };
+		E4843A0719D17F14002466A2 /* Pods-VideoCore-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pods-VideoCore-dummy.m"; sourceTree = "<group>"; };
+		E4843A0819D17F14002466A2 /* Pods-VideoCore-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pods-VideoCore-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +288,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A7B35651942542400AB5FD6 /* GLKit.framework in Frameworks */,
-				1A7B35671942564600AB5FD6 /* libPods.a in Frameworks */,
 				7265D66F191997970042DC3B /* OpenGLES.framework in Frameworks */,
 				7265D66D191997930042DC3B /* CoreVideo.framework in Frameworks */,
 				7265D66B1919978E0042DC3B /* CoreMedia.framework in Frameworks */,
@@ -84,16 +297,6 @@
 				7265D5E2191994B80042DC3B /* CoreGraphics.framework in Frameworks */,
 				7265D5E4191994B80042DC3B /* UIKit.framework in Frameworks */,
 				7265D5E0191994B80042DC3B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7265D5FD191994B80042DC3B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7265D602191994B80042DC3B /* XCTest.framework in Frameworks */,
-				7265D604191994B80042DC3B /* UIKit.framework in Frameworks */,
-				7265D603191994B80042DC3B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +317,6 @@
 			isa = PBXGroup;
 			children = (
 				7265D5DC191994B80042DC3B /* SampleBroadcaster.app */,
-				7265D600191994B80042DC3B /* SampleBroadcasterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,7 +324,6 @@
 		7265D5DE191994B80042DC3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1A7B35661942564600AB5FD6 /* libPods.a */,
 				1A7B35641942542400AB5FD6 /* GLKit.framework */,
 				7265D66E191997970042DC3B /* OpenGLES.framework */,
 				7265D66C191997930042DC3B /* CoreVideo.framework */,
@@ -134,7 +335,6 @@
 				7265D5E1191994B80042DC3B /* CoreGraphics.framework */,
 				7265D5E3191994B80042DC3B /* UIKit.framework */,
 				7265D601191994B80042DC3B /* XCTest.framework */,
-				D811EF3F24704EBFB916513B /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -142,6 +342,10 @@
 		7265D5E5191994B80042DC3B /* SampleBroadcaster */ = {
 			isa = PBXGroup;
 			children = (
+				E4843A0A19D17F14002466A2 /* VideoCore */,
+				E48438E919D17DE9002466A2 /* UriParser-cpp */,
+				E484392A19D17DE9002466A2 /* boost */,
+				E48439AA19D17DE9002466A2 /* glm */,
 				7265D5EE191994B80042DC3B /* AppDelegate.h */,
 				7265D5EF191994B80042DC3B /* AppDelegate.m */,
 				7265D5F1191994B80042DC3B /* Main_iPhone.storyboard */,
@@ -163,6 +367,271 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		E48438E819D17DE9002466A2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E48438E419D17DE9002466A2 /* Pods-UriParser-cpp.xcconfig */,
+				E48438E519D17DE9002466A2 /* Pods-UriParser-cpp-Private.xcconfig */,
+				E48438E619D17DE9002466A2 /* Pods-UriParser-cpp-dummy.m */,
+				E48438E719D17DE9002466A2 /* Pods-UriParser-cpp-prefix.pch */,
+			);
+			name = "Support Files";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		E48438E919D17DE9002466A2 /* UriParser-cpp */ = {
+			isa = PBXGroup;
+			children = (
+				E48438E219D17DE9002466A2 /* UriCodec.cpp */,
+				E48438E319D17DE9002466A2 /* UriParser.hpp */,
+				E48438E819D17DE9002466A2 /* Support Files */,
+			);
+			name = "UriParser-cpp";
+			path = "../Pods/UriParser-cpp";
+			sourceTree = "<group>";
+		};
+		E484392919D17DE9002466A2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E484392519D17DE9002466A2 /* Pods-boost.xcconfig */,
+				E484392619D17DE9002466A2 /* Pods-boost-Private.xcconfig */,
+				E484392719D17DE9002466A2 /* Pods-boost-dummy.m */,
+				E484392819D17DE9002466A2 /* Pods-boost-prefix.pch */,
+			);
+			name = "Support Files";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		E484392A19D17DE9002466A2 /* boost */ = {
+			isa = PBXGroup;
+			children = (
+				E484392919D17DE9002466A2 /* Support Files */,
+			);
+			name = boost;
+			path = ../Pods/boost;
+			sourceTree = "<group>";
+		};
+		E48439A919D17DE9002466A2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E48439A519D17DE9002466A2 /* Pods-glm.xcconfig */,
+				E48439A619D17DE9002466A2 /* Pods-glm-Private.xcconfig */,
+				E48439A719D17DE9002466A2 /* Pods-glm-dummy.m */,
+				E48439A819D17DE9002466A2 /* Pods-glm-prefix.pch */,
+			);
+			name = "Support Files";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		E48439AA19D17DE9002466A2 /* glm */ = {
+			isa = PBXGroup;
+			children = (
+				E484392B19D17DE9002466A2 /* _detail.hpp */,
+				E484392C19D17DE9002466A2 /* _fixes.hpp */,
+				E484392D19D17DE9002466A2 /* _swizzle.hpp */,
+				E484392E19D17DE9002466A2 /* _swizzle_func.hpp */,
+				E484392F19D17DE9002466A2 /* _vectorize.hpp */,
+				E484393019D17DE9002466A2 /* associated_min_max.hpp */,
+				E484393119D17DE9002466A2 /* bit.hpp */,
+				E484393219D17DE9002466A2 /* closest_point.hpp */,
+				E484393319D17DE9002466A2 /* color_cast.hpp */,
+				E484393419D17DE9002466A2 /* color_space.hpp */,
+				E484393519D17DE9002466A2 /* color_space_YCoCg.hpp */,
+				E484393619D17DE9002466A2 /* compatibility.hpp */,
+				E484393719D17DE9002466A2 /* component_wise.hpp */,
+				E484393819D17DE9002466A2 /* constants.hpp */,
+				E484393919D17DE9002466A2 /* constants.hpp */,
+				E484393A19D17DE9002466A2 /* epsilon.hpp */,
+				E484393B19D17DE9002466A2 /* epsilon.hpp */,
+				E484393C19D17DE9002466A2 /* euler_angles.hpp */,
+				E484393D19D17DE9002466A2 /* ext.hpp */,
+				E484393E19D17DE9002466A2 /* extend.hpp */,
+				E484393F19D17DE9002466A2 /* extented_min_max.hpp */,
+				E484394019D17DE9002466A2 /* fast_exponential.hpp */,
+				E484394119D17DE9002466A2 /* fast_square_root.hpp */,
+				E484394219D17DE9002466A2 /* fast_trigonometry.hpp */,
+				E484394319D17DE9002466A2 /* func_common.hpp */,
+				E484394419D17DE9002466A2 /* func_exponential.hpp */,
+				E484394519D17DE9002466A2 /* func_geometric.hpp */,
+				E484394619D17DE9002466A2 /* func_integer.hpp */,
+				E484394719D17DE9002466A2 /* func_matrix.hpp */,
+				E484394819D17DE9002466A2 /* func_noise.hpp */,
+				E484394919D17DE9002466A2 /* func_packing.hpp */,
+				E484394A19D17DE9002466A2 /* func_trigonometric.hpp */,
+				E484394B19D17DE9002466A2 /* func_vector_relational.hpp */,
+				E484394C19D17DE9002466A2 /* glm.hpp */,
+				E484394D19D17DE9002466A2 /* gradient_paint.hpp */,
+				E484394E19D17DE9002466A2 /* half_float.hpp */,
+				E484394F19D17DE9002466A2 /* handed_coordinate_space.hpp */,
+				E484395019D17DE9002466A2 /* hint.hpp */,
+				E484395119D17DE9002466A2 /* inertia.hpp */,
+				E484395219D17DE9002466A2 /* int_10_10_10_2.hpp */,
+				E484395319D17DE9002466A2 /* integer.hpp */,
+				E484395419D17DE9002466A2 /* intersect.hpp */,
+				E484395519D17DE9002466A2 /* intrinsic_common.hpp */,
+				E484395619D17DE9002466A2 /* intrinsic_exponential.hpp */,
+				E484395719D17DE9002466A2 /* intrinsic_geometric.hpp */,
+				E484395819D17DE9002466A2 /* intrinsic_matrix.hpp */,
+				E484395919D17DE9002466A2 /* intrinsic_trigonometric.hpp */,
+				E484395A19D17DE9002466A2 /* intrinsic_vector_relational.hpp */,
+				E484395B19D17DE9002466A2 /* log_base.hpp */,
+				E484395C19D17DE9002466A2 /* matrix_access.hpp */,
+				E484395D19D17DE9002466A2 /* matrix_cross_product.hpp */,
+				E484395E19D17DE9002466A2 /* matrix_integer.hpp */,
+				E484395F19D17DE9002466A2 /* matrix_interpolation.hpp */,
+				E484396019D17DE9002466A2 /* matrix_inverse.hpp */,
+				E484396119D17DE9002466A2 /* matrix_major_storage.hpp */,
+				E484396219D17DE9002466A2 /* matrix_operation.hpp */,
+				E484396319D17DE9002466A2 /* matrix_query.hpp */,
+				E484396419D17DE9002466A2 /* matrix_transform.hpp */,
+				E484396519D17DE9002466A2 /* mixed_product.hpp */,
+				E484396619D17DE9002466A2 /* multiple.hpp */,
+				E484396719D17DE9002466A2 /* noise.hpp */,
+				E484396819D17DE9002466A2 /* noise.hpp */,
+				E484396919D17DE9002466A2 /* norm.hpp */,
+				E484396A19D17DE9002466A2 /* normal.hpp */,
+				E484396B19D17DE9002466A2 /* normalize_dot.hpp */,
+				E484396C19D17DE9002466A2 /* number_precision.hpp */,
+				E484396D19D17DE9002466A2 /* ocl_type.hpp */,
+				E484396E19D17DE9002466A2 /* optimum_pow.hpp */,
+				E484396F19D17DE9002466A2 /* orthonormalize.hpp */,
+				E484397019D17DE9002466A2 /* perpendicular.hpp */,
+				E484397119D17DE9002466A2 /* polar_coordinates.hpp */,
+				E484397219D17DE9002466A2 /* projection.hpp */,
+				E484397319D17DE9002466A2 /* quaternion.hpp */,
+				E484397419D17DE9002466A2 /* quaternion.hpp */,
+				E484397519D17DE9002466A2 /* random.hpp */,
+				E484397619D17DE9002466A2 /* random.hpp */,
+				E484397719D17DE9002466A2 /* raw_data.hpp */,
+				E484397819D17DE9002466A2 /* reciprocal.hpp */,
+				E484397919D17DE9002466A2 /* reciprocal.hpp */,
+				E484397A19D17DE9002466A2 /* rotate_vector.hpp */,
+				E484397B19D17DE9002466A2 /* setup.hpp */,
+				E484397C19D17DE9002466A2 /* simd_mat4.hpp */,
+				E484397D19D17DE9002466A2 /* simd_vec4.hpp */,
+				E484397E19D17DE9002466A2 /* spline.hpp */,
+				E484397F19D17DE9002466A2 /* std_based_type.hpp */,
+				E484398019D17DE9002466A2 /* string_cast.hpp */,
+				E484398119D17DE9002466A2 /* swizzle.hpp */,
+				E484398219D17DE9002466A2 /* transform.hpp */,
+				E484398319D17DE9002466A2 /* transform2.hpp */,
+				E484398419D17DE9002466A2 /* type.hpp */,
+				E484398519D17DE9002466A2 /* type_float.hpp */,
+				E484398619D17DE9002466A2 /* type_gentype.hpp */,
+				E484398719D17DE9002466A2 /* type_half.hpp */,
+				E484398819D17DE9002466A2 /* type_int.hpp */,
+				E484398919D17DE9002466A2 /* type_mat.hpp */,
+				E484398A19D17DE9002466A2 /* type_mat2x2.hpp */,
+				E484398B19D17DE9002466A2 /* type_mat2x3.hpp */,
+				E484398C19D17DE9002466A2 /* type_mat2x4.hpp */,
+				E484398D19D17DE9002466A2 /* type_mat3x2.hpp */,
+				E484398E19D17DE9002466A2 /* type_mat3x3.hpp */,
+				E484398F19D17DE9002466A2 /* type_mat3x4.hpp */,
+				E484399019D17DE9002466A2 /* type_mat4x2.hpp */,
+				E484399119D17DE9002466A2 /* type_mat4x3.hpp */,
+				E484399219D17DE9002466A2 /* type_mat4x4.hpp */,
+				E484399319D17DE9002466A2 /* type_precision.hpp */,
+				E484399419D17DE9002466A2 /* type_ptr.hpp */,
+				E484399519D17DE9002466A2 /* type_size.hpp */,
+				E484399619D17DE9002466A2 /* type_vec.hpp */,
+				E484399719D17DE9002466A2 /* type_vec1.hpp */,
+				E484399819D17DE9002466A2 /* type_vec2.hpp */,
+				E484399919D17DE9002466A2 /* type_vec3.hpp */,
+				E484399A19D17DE9002466A2 /* type_vec4.hpp */,
+				E484399B19D17DE9002466A2 /* ulp.hpp */,
+				E484399C19D17DE9002466A2 /* ulp.hpp */,
+				E484399D19D17DE9002466A2 /* unsigned_int.hpp */,
+				E484399E19D17DE9002466A2 /* vec1.hpp */,
+				E484399F19D17DE9002466A2 /* vector_access.hpp */,
+				E48439A019D17DE9002466A2 /* vector_angle.hpp */,
+				E48439A119D17DE9002466A2 /* vector_query.hpp */,
+				E48439A219D17DE9002466A2 /* verbose_operator.hpp */,
+				E48439A319D17DE9002466A2 /* wrap.hpp */,
+				E48439A419D17DE9002466A2 /* xstream.hpp */,
+				E48439A919D17DE9002466A2 /* Support Files */,
+			);
+			name = glm;
+			path = ../Pods/glm;
+			sourceTree = "<group>";
+		};
+		E4843A0919D17F14002466A2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E4843A0519D17F14002466A2 /* Pods-VideoCore.xcconfig */,
+				E4843A0619D17F14002466A2 /* Pods-VideoCore-Private.xcconfig */,
+				E4843A0719D17F14002466A2 /* Pods-VideoCore-dummy.m */,
+				E4843A0819D17F14002466A2 /* Pods-VideoCore-prefix.pch */,
+			);
+			name = "Support Files";
+			path = sample/SampleBroadcaster/Pods;
+			sourceTree = "<group>";
+		};
+		E4843A0A19D17F14002466A2 /* VideoCore */ = {
+			isa = PBXGroup;
+			children = (
+				E48439CC19D17F14002466A2 /* AACEncode.cpp */,
+				E48439CD19D17F14002466A2 /* AACEncode.h */,
+				E48439CE19D17F14002466A2 /* AACPacketizer.cpp */,
+				E48439CF19D17F14002466A2 /* AACPacketizer.h */,
+				E48439D019D17F14002466A2 /* AspectTransform.cpp */,
+				E48439D119D17F14002466A2 /* AspectTransform.h */,
+				E48439D219D17F14002466A2 /* AudioMixer.cpp */,
+				E48439D319D17F14002466A2 /* AudioMixer.h */,
+				E48439D419D17F14002466A2 /* Buffer.hpp */,
+				E48439D519D17F14002466A2 /* CameraSource.h */,
+				E48439D619D17F14002466A2 /* CameraSource.mm */,
+				E48439D719D17F14002466A2 /* GLESUtil.h */,
+				E48439D819D17F14002466A2 /* GLESVideoMixer.h */,
+				E48439D919D17F14002466A2 /* GLESVideoMixer.mm */,
+				E48439DA19D17F14002466A2 /* GenericAudioMixer.cpp */,
+				E48439DB19D17F14002466A2 /* GenericAudioMixer.h */,
+				E48439DC19D17F14002466A2 /* Golomb.cpp */,
+				E48439DD19D17F14002466A2 /* Golomb.h */,
+				E48439DE19D17F14002466A2 /* H264Encode.cpp */,
+				E48439DF19D17F14002466A2 /* H264Encode.h */,
+				E48439E019D17F14002466A2 /* H264Encode.h */,
+				E48439E119D17F14002466A2 /* H264Encode.mm */,
+				E48439E219D17F14002466A2 /* H264Packetizer.cpp */,
+				E48439E319D17F14002466A2 /* H264Packetizer.h */,
+				E48439E419D17F14002466A2 /* IAudioMixer.hpp */,
+				E48439E519D17F14002466A2 /* IEncoder.hpp */,
+				E48439E619D17F14002466A2 /* IMetaData.hpp */,
+				E48439E719D17F14002466A2 /* IMixer.hpp */,
+				E48439E819D17F14002466A2 /* IOutput.hpp */,
+				E48439E919D17F14002466A2 /* IOutputSession.hpp */,
+				E48439EA19D17F14002466A2 /* ISource.hpp */,
+				E48439EB19D17F14002466A2 /* IStreamSession.hpp */,
+				E48439EC19D17F14002466A2 /* IThroughputAdaptation.h */,
+				E48439ED19D17F14002466A2 /* ITransform.hpp */,
+				E48439EE19D17F14002466A2 /* IVideoMixer.hpp */,
+				E48439EF19D17F14002466A2 /* JobQueue.hpp */,
+				E48439F019D17F14002466A2 /* MP4Multiplexer.h */,
+				E48439F119D17F14002466A2 /* MP4Multiplexer.mm */,
+				E48439F219D17F14002466A2 /* MicSource.h */,
+				E48439F319D17F14002466A2 /* MicSource.mm */,
+				E48439F419D17F14002466A2 /* PixelBufferSource.cpp */,
+				E48439F519D17F14002466A2 /* PixelBufferSource.h */,
+				E48439F619D17F14002466A2 /* PositionTransform.cpp */,
+				E48439F719D17F14002466A2 /* PositionTransform.h */,
+				E48439F819D17F14002466A2 /* RTMPSession.cpp */,
+				E48439F919D17F14002466A2 /* RTMPSession.h */,
+				E48439FA19D17F14002466A2 /* RTMPTypes.h */,
+				E48439FB19D17F14002466A2 /* Split.cpp */,
+				E48439FC19D17F14002466A2 /* Split.h */,
+				E48439FD19D17F14002466A2 /* StreamSession.h */,
+				E48439FE19D17F14002466A2 /* StreamSession.mm */,
+				E48439FF19D17F14002466A2 /* TCPThroughputAdaptation.cpp */,
+				E4843A0019D17F14002466A2 /* TCPThroughputAdaptation.h */,
+				E4843A0119D17F14002466A2 /* VCPreviewView.h */,
+				E4843A0219D17F14002466A2 /* VCPreviewView.mm */,
+				E4843A0319D17F14002466A2 /* VCSimpleSession.h */,
+				E4843A0419D17F14002466A2 /* VCSimpleSession.mm */,
+				E4843A0919D17F14002466A2 /* Support Files */,
+			);
+			name = VideoCore;
+			path = Pods/../../..;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -186,24 +655,6 @@
 			productReference = 7265D5DC191994B80042DC3B /* SampleBroadcaster.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7265D5FF191994B80042DC3B /* SampleBroadcasterTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7265D614191994B80042DC3B /* Build configuration list for PBXNativeTarget "SampleBroadcasterTests" */;
-			buildPhases = (
-				7265D5FC191994B80042DC3B /* Sources */,
-				7265D5FD191994B80042DC3B /* Frameworks */,
-				7265D5FE191994B80042DC3B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7265D606191994B80042DC3B /* PBXTargetDependency */,
-			);
-			name = SampleBroadcasterTests;
-			productName = SampleBroadcasterTests;
-			productReference = 7265D600191994B80042DC3B /* SampleBroadcasterTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -214,10 +665,7 @@
 				ORGANIZATIONNAME = videocore;
 				TargetAttributes = {
 					7265D5DB191994B80042DC3B = {
-						DevelopmentTeam = G5RU2HL4SN;
-					};
-					7265D5FF191994B80042DC3B = {
-						TestTargetID = 7265D5DB191994B80042DC3B;
+						DevelopmentTeam = QRT73U549N;
 					};
 				};
 			};
@@ -235,7 +683,6 @@
 			projectRoot = "";
 			targets = (
 				7265D5DB191994B80042DC3B /* SampleBroadcaster */,
-				7265D5FF191994B80042DC3B /* SampleBroadcasterTests */,
 			);
 		};
 /* End PBXProject section */
@@ -245,16 +692,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E48439CA19D17DE9002466A2 /* Pods-glm-Private.xcconfig in Resources */,
 				7265D5FB191994B80042DC3B /* Images.xcassets in Resources */,
+				E4843A2119D17F14002466A2 /* Pods-VideoCore-Private.xcconfig in Resources */,
 				7265D5F3191994B80042DC3B /* Main_iPhone.storyboard in Resources */,
+				E48439C919D17DE9002466A2 /* Pods-glm.xcconfig in Resources */,
+				E48439AC19D17DE9002466A2 /* Pods-UriParser-cpp.xcconfig in Resources */,
+				E48439C619D17DE9002466A2 /* Pods-boost.xcconfig in Resources */,
 				7265D5EA191994B80042DC3B /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7265D5FE191994B80042DC3B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E4843A2019D17F14002466A2 /* Pods-VideoCore.xcconfig in Resources */,
+				E48439C719D17DE9002466A2 /* Pods-boost-Private.xcconfig in Resources */,
+				E48439AD19D17DE9002466A2 /* Pods-UriParser-cpp-Private.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,28 +746,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4843A1C19D17F14002466A2 /* StreamSession.mm in Sources */,
+				E4843A1119D17F14002466A2 /* GenericAudioMixer.cpp in Sources */,
+				E4843A1D19D17F14002466A2 /* TCPThroughputAdaptation.cpp in Sources */,
+				E4843A1319D17F14002466A2 /* H264Encode.cpp in Sources */,
+				E4843A1719D17F14002466A2 /* MicSource.mm in Sources */,
 				7265D5F9191994B80042DC3B /* ViewController.mm in Sources */,
+				E4843A0F19D17F14002466A2 /* CameraSource.mm in Sources */,
+				E4843A1919D17F14002466A2 /* PositionTransform.cpp in Sources */,
+				E4843A1E19D17F14002466A2 /* VCPreviewView.mm in Sources */,
+				E4843A0B19D17F14002466A2 /* AACEncode.cpp in Sources */,
+				E4843A0D19D17F14002466A2 /* AspectTransform.cpp in Sources */,
+				E4843A1819D17F14002466A2 /* PixelBufferSource.cpp in Sources */,
+				E48439C819D17DE9002466A2 /* Pods-boost-dummy.m in Sources */,
+				E4843A1F19D17F14002466A2 /* VCSimpleSession.mm in Sources */,
 				7265D5F0191994B80042DC3B /* AppDelegate.m in Sources */,
+				E4843A2219D17F14002466A2 /* Pods-VideoCore-dummy.m in Sources */,
+				E48439CB19D17DE9002466A2 /* Pods-glm-dummy.m in Sources */,
+				E4843A1A19D17F14002466A2 /* RTMPSession.cpp in Sources */,
+				E4843A1419D17F14002466A2 /* H264Encode.mm in Sources */,
+				E4843A1B19D17F14002466A2 /* Split.cpp in Sources */,
+				E4843A1619D17F14002466A2 /* MP4Multiplexer.mm in Sources */,
+				E4843A0C19D17F14002466A2 /* AACPacketizer.cpp in Sources */,
 				7265D5EC191994B80042DC3B /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7265D5FC191994B80042DC3B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E4843A1019D17F14002466A2 /* GLESVideoMixer.mm in Sources */,
+				E48439AE19D17DE9002466A2 /* Pods-UriParser-cpp-dummy.m in Sources */,
+				E4843A1219D17F14002466A2 /* Golomb.cpp in Sources */,
+				E48439AB19D17DE9002466A2 /* UriCodec.cpp in Sources */,
+				E4843A0E19D17F14002466A2 /* AudioMixer.cpp in Sources */,
+				E4843A1519D17F14002466A2 /* H264Packetizer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7265D606191994B80042DC3B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7265D5DB191994B80042DC3B /* SampleBroadcaster */;
-			targetProxy = 7265D605191994B80042DC3B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7265D5E8191994B80042DC3B /* InfoPlist.strings */ = {
@@ -442,7 +901,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -464,48 +923,8 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		7265D615191994B80042DC3B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SampleBroadcaster.app/SampleBroadcaster";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SampleBroadcaster/SampleBroadcaster-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "SampleBroadcasterTests/SampleBroadcasterTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		7265D616191994B80042DC3B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SampleBroadcaster.app/SampleBroadcaster";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SampleBroadcaster/SampleBroadcaster-Prefix.pch";
-				INFOPLIST_FILE = "SampleBroadcasterTests/SampleBroadcasterTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -526,15 +945,6 @@
 			buildConfigurations = (
 				7265D612191994B80042DC3B /* Debug */,
 				7265D613191994B80042DC3B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7265D614191994B80042DC3B /* Build configuration list for PBXNativeTarget "SampleBroadcasterTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7265D615191994B80042DC3B /* Debug */,
-				7265D616191994B80042DC3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
