@@ -840,9 +840,15 @@ namespace videocore
                 props[propName] = propVal;
             } else {
                 // treat non-string property values as empty
-                p += amfPrimitiveObjectSize(p);
+                int sz=amfPrimitiveObjectSize(p);
+
+                if (sz == -1) break;
+                
+                p += sz;
                 props[propName] = "";
             }
+            
+            if (strcmp(propName, "code")==0) break;
         } while (get_be24(p) != AMF_DATA_TYPE_OBJECT_END);
         
         p = start;
