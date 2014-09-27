@@ -208,6 +208,8 @@ namespace videocore { namespace iOS {
                     
                     [session startRunning];
                     
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"VCCaptureSessionStartedNotification" object:session];
+                    
                     if(bThis->m_useInterfaceOrientation) {
                         [[NSNotificationCenter defaultCenter] addObserver:((id)bThis->m_callbackSession) selector:@selector(orientationChanged:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
                     } else {
