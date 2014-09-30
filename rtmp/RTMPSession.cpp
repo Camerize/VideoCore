@@ -37,7 +37,7 @@
 namespace videocore
 {
     RTMPSession::RTMPSession(std::string uri, RTMPSessionStateCallback callback)
-    : m_streamOutRemainder(65536),m_streamInBuffer(new RingBuffer(4096)), m_uri(http::ParseHttpUrl(uri)), m_callback(callback), m_bandwidthCallback(nullptr), m_outChunkSize(128), m_inChunkSize(128), m_streamId(0),  m_createStreamInvoke(0), m_numberOfInvokes(0), m_state(kClientStateNone), m_ending(false)
+    : m_streamOutRemainder(65536),m_streamInBuffer(new RingBuffer(4096)), m_uri(http::ParseHttpUrl(uri)), m_callback(callback), m_bandwidthCallback(nullptr), m_outChunkSize(128), m_inChunkSize(128), m_streamId(0),  m_createStreamInvoke(0), m_numberOfInvokes(0), m_state(kClientStateNone), m_ending(false),c_count(0)
     {
 #ifdef __APPLE__
         m_streamSession.reset(new Apple::StreamSession());
@@ -116,7 +116,8 @@ namespace videocore
         const RTMPMetadata_t inMetadata = static_cast<const RTMPMetadata_t&>(metadata);
         
         m_jobQueue.enqueue([&,buf,inMetadata]() {
-            static int c_count = 0;
+            //static int c_count = 0;
+#define c_count (this->c_count)
             c_count ++;
             
             std::vector<uint8_t> chunk;
@@ -191,8 +192,8 @@ namespace videocore
             std::shared_ptr<Buffer> buf = std::make_shared<Buffer>(size);
             buf->put(data, size);
             m_streamOutQueue.push_back(buf);
-            static size_t count = 0;
-            count++;
+            //static size_t count = 0;
+            //count++;
         }
         //if(!(m_streamSession->status() & kStreamStatusWriteBufferHasSpace)) {
         //    printf("[1] stream does not have space\n");
@@ -253,11 +254,11 @@ namespace videocore
     RTMPSession::dataReceived()
     {
         
-        static uint8_t buffer[4096] = {0};
+        uint8_t buffer[40960] = {0};
         bool stop1 = false;
         bool stop2 = false;
         do {
-            
+         //   std::unique_ptr<uint8_t>
             size_t maxlen = m_streamInBuffer->total() - m_streamInBuffer->size();
             size_t len = m_streamSession->read(buffer, maxlen);
             

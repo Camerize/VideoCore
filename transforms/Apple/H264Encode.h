@@ -29,7 +29,7 @@ namespace videocore { namespace Apple {
     class H264Encode : public IEncoder
     {
     public:
-        H264Encode( int frame_w, int frame_h, int fps, int bitrate );
+        H264Encode( int frame_w, int frame_h, int fps, int bitrate, bool force_keyframes = false, int decimate_factor=1);
         ~H264Encode();
         
     public:
@@ -63,6 +63,9 @@ namespace videocore { namespace Apple {
         int                    m_bitrate;
         
         bool                   m_forceKeyframe;
+        bool                   m_onlyKeyFrames;
+        int                    m_decimate_factor;
+        int                    m_decimate_counter;
         
     };
 }
