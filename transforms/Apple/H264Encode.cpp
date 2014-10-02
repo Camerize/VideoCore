@@ -196,14 +196,14 @@ namespace videocore { namespace Apple {
         
         if(err == noErr) {
             m_compressionSession = session;
-            int32_t v = m_fps * 2 / m_decimate_factor; // 2-second kfi
+            const int32_t v = m_fps * 2 / m_decimate_factor; // 2-second kfi
             CFNumberRef ref = CFNumberCreate(NULL, kCFNumberSInt32Type, &v);
             err = VTSessionSetProperty(session, kVTCompressionPropertyKey_MaxKeyFrameInterval, ref);
             CFRelease(ref);
         }
 
         if(err == noErr) {
-            const int32_t v = m_fps / 2/ m_decimate_factor; // limit the number of frames kept in the buffer
+            const int32_t v = m_fps / 2 / m_decimate_factor; // limit the number of frames kept in the buffer
             CFNumberRef ref = CFNumberCreate(NULL, kCFNumberSInt32Type, &v);
             //err = VTSessionSetProperty(session, kVTCompressionPropertyKey_MaxFrameDelayCount, ref);
             CFRelease(ref);

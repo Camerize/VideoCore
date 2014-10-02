@@ -114,48 +114,12 @@ namespace videocore {
             
             CVPixelBufferUnlockBaseAddress(pb, kCVPixelBufferLock_ReadOnly);
             
+            videocore::VideoBufferMetadata& md = dynamic_cast<videocore::VideoBufferMetadata&>(metadata);
+            glm::mat4 & mat = md.getData<videocore::kVideoMetadataMatrix>();
             
-            
-            videocore::VideoBufferMetadata* mdp = dynamic_cast<videocore::VideoBufferMetadata*>(&metadata);
-            videocore::VideoBufferMetadata md(metadata.timestampDelta);
-            
-            
-            if (mdp != NULL)
-                md = *mdp;
-            else
-             {
-                float w = float(CVPixelBufferGetWidth(pb));
-                float h = float(CVPixelBufferGetHeight(pb));
-                
-                const float wfac = 1;
-                const float hfac = 1;
-                
-                const float mult = (m_aspectMode == kAspectFit ? (wfac < hfac) : (wfac > hfac)) ? wfac : hfac;
-                
-                w *= mult;
-                h *= mult;
-                
-                glm::mat4 mat(1.f);
-                 
-                mat = glm::translate(mat,
-                                     glm::vec3(1 * 2.f - 1.f,   // The compositor uses normalized device co-ordinates.
-                                               1 * 2.f - 1.f,   // i.e. [ -1 .. 1 ]
-                                               0.f));
-                
-                mat = glm::scale(mat,
-                                 glm::vec3(1, //
-                                           1, // size is a percentage for scaling.
-                                           1.f));
-                 
-                 md.setData(1, mat, std::weak_ptr<ISource>());
-                 
-
-            }
-            
-            glm::mat4& mat = md.getData<videocore::kVideoMetadataMatrix>();
             mat = glm::scale(mat, m_scale);
             
-            output->pushBuffer(data, size, md);
+            output->pushBuffer(data, size, metadata);
         }
     }
     

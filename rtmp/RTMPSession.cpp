@@ -115,8 +115,6 @@ namespace videocore
         const RTMPMetadata_t inMetadata = static_cast<const RTMPMetadata_t&>(metadata);
         
         m_jobQueue.enqueue([&,buf,inMetadata]() {
-            //static int c_count = 0;
-#define c_count (this->c_count)
             c_count ++;
             
             std::vector<uint8_t> chunk;
@@ -191,8 +189,6 @@ namespace videocore
             std::shared_ptr<Buffer> buf = std::make_shared<Buffer>(size);
             buf->put(data, size);
             m_streamOutQueue.push_back(buf);
-            //static size_t count = 0;
-            //count++;
         }
         //if(!(m_streamSession->status() & kStreamStatusWriteBufferHasSpace)) {
         //    printf("[1] stream does not have space\n");
@@ -257,7 +253,6 @@ namespace videocore
         bool stop1 = false;
         bool stop2 = false;
         do {
-         //   std::unique_ptr<uint8_t>
             size_t maxread = m_streamInBuffer->total() - m_streamInBuffer->size();
             
             size_t len = m_streamSession->read(buffer, std::min(sizeof(buffer),maxread));

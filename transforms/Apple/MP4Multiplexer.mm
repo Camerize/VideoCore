@@ -48,6 +48,8 @@ namespace videocore { namespace Apple {
         }
     }
     
+    void MP4Multiplexer::setBandwidthCallback(BandwidthCallback callback) {}
+
     void
     MP4Multiplexer::setSessionParameters(videocore::IMetadata &parameters)
     {

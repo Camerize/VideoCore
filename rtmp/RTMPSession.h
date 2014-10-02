@@ -118,7 +118,6 @@ namespace videocore
         
     private:
         
-        //uint8_t buffer[4096];
         int c_count;
         JobQueue            m_jobQueue;
         

@@ -44,7 +44,7 @@ namespace videocore {
     public:
         
         virtual void setSessionParameters(IMetadata & parameters) = 0 ;
-        virtual void setBandwidthCallback(BandwidthCallback callback) {};
+        virtual void setBandwidthCallback(BandwidthCallback callback) = 0;
         
         virtual ~IOutputSession() {};
         
