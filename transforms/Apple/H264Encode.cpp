@@ -127,7 +127,7 @@ namespace videocore { namespace Apple {
                 
                 CFMutableDictionaryRef frameProps = NULL;
                 
-                if(m_forceKeyframe || m_onlyKeyFrames) {
+                if(m_forceKeyframe) {
                     frameProps = CFDictionaryCreateMutable(kCFAllocatorDefault, 1,&kCFTypeDictionaryKeyCallBacks,                                                            &kCFTypeDictionaryValueCallBacks);
                 
                 
@@ -197,8 +197,6 @@ namespace videocore { namespace Apple {
         if(err == noErr) {
             m_compressionSession = session;
             int32_t v = m_fps * 2 / m_decimate_factor; // 2-second kfi
-            if (m_onlyKeyFrames)
-                v = 1;
             CFNumberRef ref = CFNumberCreate(NULL, kCFNumberSInt32Type, &v);
             err = VTSessionSetProperty(session, kVTCompressionPropertyKey_MaxKeyFrameInterval, ref);
             CFRelease(ref);
@@ -231,6 +229,10 @@ namespace videocore { namespace Apple {
 
         if(err == noErr) {
             err = VTSessionSetProperty(session, kVTCompressionPropertyKey_RealTime, kCFBooleanTrue);
+        }
+        
+        if(err == noErr && m_onlyKeyFrames) {
+            err = VTSessionSetProperty(session, kVTCompressionPropertyKey_AllowTemporalCompression, kCFBooleanFalse);
         }
         
         if(err == noErr) {
