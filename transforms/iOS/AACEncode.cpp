@@ -80,7 +80,7 @@ namespace videocore { namespace iOS {
         return str;
     }
     
-    AACEncode::AACEncode(int frequencyInHz, int channelCount)
+    AACEncode::AACEncode(int frequencyInHz, int channelCount, int bitRate)
     : m_sentConfig(false)
     {
         
@@ -110,7 +110,7 @@ namespace videocore { namespace iOS {
         out.mSampleRate = frequencyInHz;
         out.mChannelsPerFrame = channelCount;
         
-        UInt32 outputBitrate = 128000; // 128 kbps
+        UInt32 outputBitrate = bitRate; // 128 kbps
         UInt32 propSize = sizeof(outputBitrate);
         UInt32 outputPacketSize = 0;
 

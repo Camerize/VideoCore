@@ -118,6 +118,7 @@ namespace videocore
         
     private:
         
+        int c_count;
         JobQueue            m_jobQueue;
         
         RingBuffer          m_streamOutRemainder;

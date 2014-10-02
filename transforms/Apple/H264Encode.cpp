@@ -94,8 +94,8 @@ namespace videocore { namespace Apple {
         
     }
 #endif
-    H264Encode::H264Encode( int frame_w, int frame_h, int fps, int bitrate )
-    : m_frameW(frame_w), m_frameH(frame_h), m_fps(fps), m_bitrate(bitrate), m_forceKeyframe(false)
+    H264Encode::H264Encode( int frame_w, int frame_h, int fps, int bitrate, bool only_keyframes, int decimate_factor )
+    : m_frameW(frame_w), m_frameH(frame_h), m_fps(fps), m_bitrate(bitrate), m_forceKeyframe(false), m_onlyKeyFrames(only_keyframes), m_decimate_factor(decimate_factor), m_decimate_counter(0)
     {
         setupCompressionSession();
     }
@@ -114,27 +114,32 @@ namespace videocore { namespace Apple {
 #if VERSION_OK
         if(m_compressionSession) {
             m_encodeMutex.lock();
-            VTCompressionSessionRef session = (VTCompressionSessionRef)m_compressionSession;
             
-            CMTime pts = CMTimeMake(metadata.timestampDelta, 1000.); // timestamp is in ms.
-            CMTime dur = CMTimeMake(1, m_fps);
-            VTEncodeInfoFlags flags;
-            
-            
-            CFMutableDictionaryRef frameProps = NULL;
-            
-            if(m_forceKeyframe) {
-                frameProps = CFDictionaryCreateMutable(kCFAllocatorDefault, 1,&kCFTypeDictionaryKeyCallBacks,                                                            &kCFTypeDictionaryValueCallBacks);
-            
-            
-                CFDictionaryAddValue(frameProps, kVTEncodeFrameOptionKey_ForceKeyFrame, kCFBooleanTrue);
-            }
-            
-            VTCompressionSessionEncodeFrame(session, (CVPixelBufferRef)data, pts, dur, frameProps, NULL, &flags);
-            
-            if(m_forceKeyframe) {
-                CFRelease(frameProps);
-                m_forceKeyframe = false;
+            m_decimate_counter++;
+            if ( (m_decimate_counter % m_decimate_factor) == 0) {
+                VTCompressionSessionRef session = (VTCompressionSessionRef)m_compressionSession;
+                
+                CMTime pts = CMTimeMake(metadata.timestampDelta, 1000.); // timestamp is in ms.
+                CMTime dur = CMTimeMake(m_decimate_factor, m_fps);
+                VTEncodeInfoFlags flags;
+                
+                
+                
+                CFMutableDictionaryRef frameProps = NULL;
+                
+                if(m_forceKeyframe) {
+                    frameProps = CFDictionaryCreateMutable(kCFAllocatorDefault, 1,&kCFTypeDictionaryKeyCallBacks,                                                            &kCFTypeDictionaryValueCallBacks);
+                
+                
+                    CFDictionaryAddValue(frameProps, kVTEncodeFrameOptionKey_ForceKeyFrame, kCFBooleanTrue);
+                }
+                
+                VTCompressionSessionEncodeFrame(session, (CVPixelBufferRef)data, pts, dur, frameProps, NULL, &flags);
+                
+                if(frameProps) {
+                    CFRelease(frameProps);
+                    m_forceKeyframe = false;
+                }
             }
             
             m_encodeMutex.unlock();
@@ -191,21 +196,21 @@ namespace videocore { namespace Apple {
         
         if(err == noErr) {
             m_compressionSession = session;
-            const int32_t v = m_fps * 2; // 2-second kfi
+            const int32_t v = m_fps * 2 / m_decimate_factor; // 2-second kfi
             CFNumberRef ref = CFNumberCreate(NULL, kCFNumberSInt32Type, &v);
             err = VTSessionSetProperty(session, kVTCompressionPropertyKey_MaxKeyFrameInterval, ref);
             CFRelease(ref);
         }
 
         if(err == noErr) {
-            const int32_t v = m_fps / 2; // limit the number of frames kept in the buffer
+            const int32_t v = m_fps / 2 / m_decimate_factor; // limit the number of frames kept in the buffer
             CFNumberRef ref = CFNumberCreate(NULL, kCFNumberSInt32Type, &v);
             //err = VTSessionSetProperty(session, kVTCompressionPropertyKey_MaxFrameDelayCount, ref);
             CFRelease(ref);
         }
 
         if(err == noErr) {
-            const int v = m_fps;
+            const int v = m_fps / m_decimate_factor;
             CFNumberRef ref = CFNumberCreate(NULL, kCFNumberSInt32Type, &v);
             err = VTSessionSetProperty(session, kVTCompressionPropertyKey_ExpectedFrameRate, ref);
             CFRelease(ref);
@@ -224,6 +229,10 @@ namespace videocore { namespace Apple {
 
         if(err == noErr) {
             err = VTSessionSetProperty(session, kVTCompressionPropertyKey_RealTime, kCFBooleanTrue);
+        }
+        
+        if(err == noErr && m_onlyKeyFrames) {
+            err = VTSessionSetProperty(session, kVTCompressionPropertyKey_AllowTemporalCompression, kCFBooleanFalse);
         }
         
         if(err == noErr) {
