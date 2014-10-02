@@ -33,7 +33,6 @@
 #include <algorithm>
 #include <sstream>
 
-
 namespace videocore
 {
     RTMPSession::RTMPSession(std::string uri, RTMPSessionStateCallback callback)
@@ -254,13 +253,14 @@ namespace videocore
     RTMPSession::dataReceived()
     {
         
-        uint8_t buffer[40960] = {0};
+        uint8_t buffer[4096] = {0};
         bool stop1 = false;
         bool stop2 = false;
         do {
          //   std::unique_ptr<uint8_t>
-            size_t maxlen = m_streamInBuffer->total() - m_streamInBuffer->size();
-            size_t len = m_streamSession->read(buffer, maxlen);
+            size_t maxread = m_streamInBuffer->total() - m_streamInBuffer->size();
+            
+            size_t len = m_streamSession->read(buffer, std::min(sizeof(buffer),maxread));
             
             m_streamInBuffer->put(&buffer[0], len);
             
