@@ -248,8 +248,8 @@ namespace videocore
     void
     RTMPSession::dataReceived()
     {
-        
-        uint8_t buffer[409600] = {0};
+        printf("dataReceived\n");
+        uint8_t buffer[4096] = {0};
         bool stop1 = false;
         bool stop2 = false;
         do {

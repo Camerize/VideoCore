@@ -159,8 +159,9 @@ namespace videocore { namespace Apple {
                 
                 if (!rv)
                     NSLog(@"Failed video %d, %d, %@", rv, (int)v.status, v.error);
-                else
+                /*else
                     NSLog(@"DID WRITE VIDEO");
+                */
             } else {
                 NSLog(@"Dropped Video Frame");
             }
@@ -174,10 +175,10 @@ namespace videocore { namespace Apple {
     void
     MP4Multiplexer::pushAudioBuffer(const uint8_t *const data, size_t size, videocore::IMetadata &metadata)
     {
-        bool first = false;
+      //  bool first = false;
         if(!m_audioFormat)
         {
-            first = true;
+            //first = true;
             AudioBufferMetadata& md = dynamic_cast<AudioBufferMetadata&>(metadata);
             
             
@@ -190,7 +191,7 @@ namespace videocore { namespace Apple {
             
             CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &asbd, 0, nullptr, size, data, NULL, (CMAudioFormatDescriptionRef*)&m_audioFormat);
             
-        } else {
+        } /*else*/ {
             
             double delta=1024/44100.0*1000;
             CMSampleTimingInfo audioSampleTimingInformation =  {CMTimeMake(delta, 1000.), CMTimeMake(audio_pts, 1000.) , kCMTimeInvalid};
@@ -231,8 +232,9 @@ namespace videocore { namespace Apple {
                 auto v = (AVAssetWriter*)m_assetWriter;
                 if (!rv)
                     NSLog(@"Failed Audio %d, %d, %@", rv, (int)v.status, v.error);
-                else
+                /*else
                     NSLog(@"DID WRITE Audio %f,%f", audio_pts, video_pts);
+                */
             } else {
                 NSLog(@"Dropped Audio Frame");
             }
