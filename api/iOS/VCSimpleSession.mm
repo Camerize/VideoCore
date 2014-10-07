@@ -393,7 +393,8 @@ namespace videocore { namespace simpleApi {
     
     _cameraState = VCCameraStateBack;
     _exposurePOI = _focusPOI = CGPointMake(0.5f, 0.5f);
-    _continuousExposure = _continuousAutofocus = YES;
+#warning changed bellow value
+    _continuousExposure = _continuousAutofocus = NO;
     
     _graphManagementQueue = dispatch_queue_create("com.videocore.session.graph", 0);
 

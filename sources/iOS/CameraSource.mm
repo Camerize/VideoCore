@@ -212,9 +212,12 @@ namespace videocore { namespace iOS {
                     
                     if(bThis->m_useInterfaceOrientation) {
                         [[NSNotificationCenter defaultCenter] addObserver:((id)bThis->m_callbackSession) selector:@selector(orientationChanged:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+                        [[NSNotificationCenter defaultCenter] addObserver:((id)bThis->m_callbackSession) selector:@selector(orientationChanged:) name:@"VCCameraSourceSwitchedCameraNotificationName" object:nil];
                     } else {
                         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
                         [[NSNotificationCenter defaultCenter] addObserver:((id)bThis->m_callbackSession) selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+#warning Remove from notication center
+                        [[NSNotificationCenter defaultCenter] addObserver:((id)bThis->m_callbackSession) selector:@selector(orientationChanged:) name:@"VCCameraSourceSwitchedCameraNotificationName" object:nil];
                     }
                     [output release];
                 }
@@ -251,6 +254,7 @@ namespace videocore { namespace iOS {
             previewLayer =  [AVCaptureVideoPreviewLayer layerWithSession:session];
             previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
             m_previewLayer = previewLayer;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"VCCaptureSessionVideoPreviewLayerCreated" object:previewLayer];
         }
         if(outAVCaptureVideoPreviewLayer) {
             *outAVCaptureVideoPreviewLayer = m_previewLayer;
@@ -352,13 +356,14 @@ namespace videocore { namespace iOS {
         
         for (AVCaptureVideoDataOutput* output in session.outputs) {
             for (AVCaptureConnection * av in output.connections) {
-                
+
+#warning made some changes on follow up code, see //1 + //2
                 switch (orientation) {
                         // UIInterfaceOrientationPortraitUpsideDown, UIDeviceOrientationPortraitUpsideDown
                     case UIInterfaceOrientationPortraitUpsideDown:
                         if(av.videoOrientation != AVCaptureVideoOrientationPortraitUpsideDown) {
-                            av.videoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
-                            reorient = true;
+                            //av.videoOrientation = AVCaptureVideoOrientationPortraitUpsideDown; //2
+                            reorient = false; //1
                         }
                         break;
                         // UIInterfaceOrientationLandscapeRight, UIDeviceOrientationLandscapeLeft
@@ -378,8 +383,8 @@ namespace videocore { namespace iOS {
                         // UIInterfaceOrientationPortrait, UIDeviceOrientationPortrait
                     case UIInterfaceOrientationPortrait:
                         if(av.videoOrientation != AVCaptureVideoOrientationPortrait) {
-                            av.videoOrientation = AVCaptureVideoOrientationPortrait;
-                            reorient = true;
+                           // av.videoOrientation = AVCaptureVideoOrientationPortrait; //2
+                            reorient = false; //1
                         }
                         break;
                     default:
