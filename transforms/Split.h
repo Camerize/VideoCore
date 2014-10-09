@@ -49,6 +49,7 @@ namespace videocore {
         
     private:
         
+        std::mutex m_mtx;
         std::vector<std::weak_ptr<IOutput>> m_outputs;
         
     };

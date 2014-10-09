@@ -36,6 +36,7 @@ namespace videocore {
     void
     Split::setOutput(std::shared_ptr<IOutput> output)
     {
+        m_mtx.lock();
         const auto inHash = std::hash<std::shared_ptr<IOutput>>()(output);
         bool duplicate = false;
         for ( auto & it : m_outputs) {
@@ -48,10 +49,12 @@ namespace videocore {
         if(!duplicate) {
             m_outputs.push_back(output);
         }
+        m_mtx.unlock();
     }
     void
     Split::removeOutput(std::shared_ptr<IOutput> output)
     {
+        m_mtx.lock();
         const auto inHash = std::hash<std::shared_ptr<IOutput>>()(output);
         
         auto it = std::remove_if(m_outputs.begin(), m_outputs.end(), [=](const std::weak_ptr<IOutput>& rhs) {
@@ -63,15 +66,20 @@ namespace videocore {
             return true;
         });
         m_outputs.resize(std::distance(m_outputs.begin(), it));
+        
+        m_mtx.unlock();
     }
+    
     void
     Split::pushBuffer(const uint8_t* const data, size_t size, IMetadata& metadata)
     {
+        m_mtx.lock();
         for ( auto & it : m_outputs ) {
             auto outp = it.lock();
             if(outp) {
                 outp->pushBuffer(data, size, metadata);
             }
         }
+        m_mtx.unlock();
     }
 }
