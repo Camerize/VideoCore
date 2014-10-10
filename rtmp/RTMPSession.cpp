@@ -307,7 +307,7 @@ namespace videocore
                 }
             }
             
-        } while((m_streamSession->status() & kStreamStatusReadBufferHasBytes) && !stop2);
+        } while(m_streamSession && (m_streamSession->status() & kStreamStatusReadBufferHasBytes) && !stop2);
     }
     void
     RTMPSession::setClientState(ClientState_t state)
