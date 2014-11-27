@@ -95,7 +95,7 @@ namespace videocore { namespace Apple {
     }
 #endif
     H264Encode::H264Encode( int frame_w, int frame_h, int fps, int bitrate, bool only_keyframes, int decimate_factor )
-    : m_frameW(frame_w), m_frameH(frame_h), m_fps(fps), m_bitrate(bitrate), m_forceKeyframe(false), m_onlyKeyFrames(only_keyframes), m_decimate_factor(decimate_factor), m_decimate_counter(0)
+    : m_frameW(frame_w), m_frameH(frame_h), m_fps(fps), m_bitrate(bitrate), m_forceKeyframe(false), m_onlyKeyFrames(only_keyframes), m_decimate_factor(decimate_factor), m_decimate_counter(0), m_compressionSession(nullptr)
     {
         setupCompressionSession();
     }
@@ -240,6 +240,15 @@ namespace videocore { namespace Apple {
         }
         if(err == noErr) {
             VTCompressionSessionPrepareToEncodeFrames(session);
+        }
+        
+        if (err != noErr) {
+            printf("Failed to initialize H264 context, %d \n", (int)err);
+            if (session) {
+                VTCompressionSessionInvalidate((VTCompressionSessionRef)m_compressionSession);
+                CFRelease((VTCompressionSessionRef)m_compressionSession);
+            }
+            session = nullptr;
         }
 #endif
         

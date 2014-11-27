@@ -27,18 +27,25 @@
 #include <videocore/transforms/Apple/MP4Multiplexer.h>
 #include <videocore/mixers/IAudioMixer.hpp>
 
+dispatch_queue_t _graphManagementQueue = dispatch_queue_create("com.videocore.session.mov", DISPATCH_QUEUE_SERIAL);
+
+double video_pts = 0;
+double audio_pts = 0;
 namespace videocore { namespace Apple {
  
     
     MP4Multiplexer::MP4Multiplexer() : m_assetWriter(nullptr), m_videoInput(nullptr), m_audioInput(nullptr), m_videoFormat(nullptr), m_audioFormat(nullptr), m_fps(30), m_framecount(0)
     {
+
         
     }
     MP4Multiplexer::~MP4Multiplexer()
     {
         if(m_assetWriter) {
+            NSLog(@"Closing asset writer");
             __block AVAssetWriter* writer = (AVAssetWriter*)m_assetWriter;
             [writer finishWritingWithCompletionHandler:^{
+                NSLog(@"Closed asset writer");
                 [writer release];
             }];
             
@@ -88,20 +95,23 @@ namespace videocore { namespace Apple {
         m_assetWriter = writer;
         m_audioInput = audio;
         m_videoInput = video;
-        
     }
     void
     MP4Multiplexer::pushBuffer(const uint8_t *const data, size_t size, videocore::IMetadata &metadata)
     {
         switch(metadata.type()) {
             case 'vide':
-                // Process video
-                pushVideoBuffer(data,size,metadata);
-                
+                dispatch_sync(_graphManagementQueue, ^{
+                    // Process video
+                    pushVideoBuffer(data,size,metadata);
+                });
                 break;
+                
             case 'soun':
-                // Process audio
-                pushAudioBuffer(data,size,metadata);
+                dispatch_sync(_graphManagementQueue, ^{
+                    // Process audio
+                    pushAudioBuffer(data,size,metadata);
+                });
                 
                 break;
             default:
@@ -132,17 +142,30 @@ namespace videocore { namespace Apple {
             CMBlockBufferRef buffer;
             CMBlockBufferCreateWithMemoryBlock(kCFAllocatorDefault, (void*)data, size, kCFAllocatorDefault, NULL, 0, size, kCMBlockBufferAssureMemoryNowFlag, &buffer);
             
-            CMSampleTimingInfo videoSampleTimingInformation = {CMTimeMake(metadata.timestampDelta, 1000.)};
+            double delta=1/30.0*1000;
+            CMSampleTimingInfo videoSampleTimingInformation =  {CMTimeMake(delta, 1000.), CMTimeMake(video_pts, 1000.) , kCMTimeInvalid};
+            
+            video_pts += delta;
+
             CMSampleBufferCreate(kCFAllocatorDefault, buffer, true, NULL, NULL, (CMFormatDescriptionRef)m_videoFormat, 1, 1, &videoSampleTimingInformation, 1, &size, &sample);
             CMSampleBufferMakeDataReady(sample);
             
             AVAssetWriterInput* video = (AVAssetWriterInput*)m_videoInput;
             
-            NSLog(@"Appending video");
+            //NSLog(@"Appending video");
             if(video.readyForMoreMediaData) {
-                [video appendSampleBuffer:sample];
+                BOOL rv=[video appendSampleBuffer:sample];
+                auto v = (AVAssetWriter*)m_assetWriter;
+                
+                if (!rv)
+                    NSLog(@"Failed video %d, %d, %@", rv, (int)v.status, v.error);
+                /*else
+                    NSLog(@"DID WRITE VIDEO");
+                */
+            } else {
+                NSLog(@"Dropped Video Frame");
             }
-            NSLog(@"Done video");
+            
             CFRelease(sample);
             //CFRelease(buffer);
             
@@ -152,8 +175,10 @@ namespace videocore { namespace Apple {
     void
     MP4Multiplexer::pushAudioBuffer(const uint8_t *const data, size_t size, videocore::IMetadata &metadata)
     {
+      //  bool first = false;
         if(!m_audioFormat)
         {
+            //first = true;
             AudioBufferMetadata& md = dynamic_cast<AudioBufferMetadata&>(metadata);
             
             
@@ -166,14 +191,17 @@ namespace videocore { namespace Apple {
             
             CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &asbd, 0, nullptr, size, data, NULL, (CMAudioFormatDescriptionRef*)&m_audioFormat);
             
-        } else {
+        } /*else*/ {
             
-            CMSampleTimingInfo audioSampleTimingInformation = {CMTimeMake(metadata.timestampDelta, 1000.)};
-            
+            double delta=1024/44100.0*1000;
+            CMSampleTimingInfo audioSampleTimingInformation =  {CMTimeMake(delta, 1000.), CMTimeMake(audio_pts, 1000.) , kCMTimeInvalid};
+
+            audio_pts += delta;
+
             CMSampleBufferRef sample;
             CMBlockBufferRef buffer;
             CMBlockBufferCreateWithMemoryBlock(kCFAllocatorDefault, (void*)data, size, kCFAllocatorDefault, NULL, 0, size, kCMBlockBufferAssureMemoryNowFlag, &buffer);
-    
+
 
             CMSampleBufferCreate(kCFAllocatorDefault,
                                  buffer,
@@ -188,16 +216,32 @@ namespace videocore { namespace Apple {
                                  &size,
                                  &sample);
             CMSampleBufferMakeDataReady(sample);
-            CFDictionaryRef dict = CMTimeCopyAsDictionary(CMTimeMake(1, 1000), kCFAllocatorDefault);
             
-            CMSetAttachment(sample, kCMSampleBufferAttachmentKey_TrimDurationAtStart, dict, kCMAttachmentMode_ShouldNotPropagate);
+            CFDictionaryRef dict = NULL;
+            /*if (first)*/{
+                 dict = CMTimeCopyAsDictionary(CMTimeMake(1024, 44100), kCFAllocatorDefault);
+                
+                CMSetAttachment(sample, kCMSampleBufferAttachmentKey_TrimDurationAtStart, dict, kCMAttachmentMode_ShouldNotPropagate);
+            }
+            
             AVAssetWriterInput* audio = (AVAssetWriterInput*)m_audioInput;
+                
+            if (audio.readyForMoreMediaData){
+                //NSLog(@"Appending audio");
+                BOOL rv = [audio appendSampleBuffer:sample];
+                auto v = (AVAssetWriter*)m_assetWriter;
+                if (!rv)
+                    NSLog(@"Failed Audio %d, %d, %@", rv, (int)v.status, v.error);
+                /*else
+                    NSLog(@"DID WRITE Audio %f,%f", audio_pts, video_pts);
+                */
+            } else {
+                NSLog(@"Dropped Audio Frame");
+            }
+           
             
-            NSLog(@"Appending audio");
-            [audio appendSampleBuffer:sample];
-            NSLog(@"Done audio");
             CFRelease(sample);
-            CFRelease(dict);
+            if (dict) CFRelease(dict);
             //CFRelease(buffer);
         }
     }
@@ -213,12 +257,21 @@ namespace videocore { namespace Apple {
         avcc.push_back(0xFC|0x3);
         avcc.push_back(0xE0|0x1);
         
+        /*
         const short sps_size = __builtin_bswap16(m_sps.size());
         const short pps_size = __builtin_bswap16(m_pps.size());
-        avcc.insert(avcc.end(), &sps_size, &sps_size+1);
+        */
+        //avcc.insert(avcc.end(), &sps_size, &sps_size+1);
+        avcc.push_back(m_sps.size()>>8);
+        avcc.push_back(m_sps.size()%256);
+        
         avcc.insert(avcc.end(), m_sps.begin(), m_sps.end());
+        
         avcc.push_back(0x01);
-        avcc.insert(avcc.end(), &pps_size, &pps_size+1);
+        avcc.push_back(m_pps.size()>>8);
+        avcc.push_back(m_pps.size()%256);
+        
+       // avcc.insert(avcc.end(), &pps_size, &pps_size+1);
         avcc.insert(avcc.end(), m_pps.begin(), m_pps.end());
         
         const char *avcC = "avcC";
