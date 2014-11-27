@@ -33,7 +33,6 @@
 #include <algorithm>
 #include <sstream>
 
-#define DLog(...)
 namespace videocore
 {
     RTMPSession::RTMPSession(std::string uri, RTMPSessionStateCallback callback)
@@ -618,87 +617,9 @@ namespace videocore
         });
     }
     bool
-    RTMPSession::handleMessage(uint8_t *p, uint8_t msgTypeId)
-    {
-        bool ret = true;
-        
-        switch(msgTypeId) {
-            case RTMP_PT_BYTES_READ:
-            {
-                //DLog("received bytes read: %d\n", get_be32(p));
-            }
-                break;
-                
-            case RTMP_PT_CHUNK_SIZE:
-            {
-                unsigned long newChunkSize = get_be32(p);
-                DLog("Request to change incoming chunk size from %zu -> %zu\n", m_inChunkSize, newChunkSize);
-                m_inChunkSize = newChunkSize;
-            }
-                break;
-                
-            case RTMP_PT_PING:
-            {
-                DLog("received ping, sending pong.\n");
-                sendPong();
-            }
-                break;
-                
-            case RTMP_PT_SERVER_WINDOW:
-            {
-                DLog("received server window size: %d\n", get_be32(p));
-            }
-                break;
-                
-            case RTMP_PT_PEER_BW:
-            {
-                DLog("received peer bandwidth limit: %d type: %d\n", get_be32(p), p[4]);
-            }
-                break;
-                
-            case RTMP_PT_INVOKE:
-            {
-                DLog("Received invoke\n");
-                handleInvoke(p);
-            }
-                break;
-            case RTMP_PT_VIDEO:
-            {
-                DLog("received video\n");
-            }
-                break;
-                
-            case RTMP_PT_AUDIO:
-            {
-                DLog("received audio\n");
-            }
-                break;
-                
-            case RTMP_PT_METADATA:
-            {
-                DLog("received metadata\n");
-            }
-                break;
-                
-            case RTMP_PT_NOTIFY:
-            {
-                DLog("received notify\n");
-            }
-                break;
-                
-            default:
-            {
-                DLog("received unknown packet type: 0x%02X\n", msgTypeId);
-                ret = false;
-            }
-                break;
-        }
-        return ret;
-    }
-    bool
     RTMPSession::parseCurrentData()
     {
-        const size_t size = m_streamInBuffer->size();
+        size_t size = m_streamInBuffer->size();
         
         uint8_t buf[size], *p, *start ;
         
@@ -707,18 +628,16 @@ namespace videocore
         long ret = m_streamInBuffer->get(p, size, false);
         
         start = p;
-
+        
         if(!p) return false;
         
         while (ret>0) {
             int header_type = (p[0] & 0xC0) >> 6;
             p++;
             ret--;
-
             switch(header_type) {
                 case RTMP_HEADER_TYPE_FULL:
                 {
-                    
                     RTMPChunk_0 chunk;
                     memcpy(&chunk, p, sizeof(RTMPChunk_0));
                     chunk.msg_length.data = get_be24((uint8_t*)&chunk.msg_length);
@@ -727,31 +646,89 @@ namespace videocore
                     p+=sizeof(chunk);
                     ret -= sizeof(chunk);
                     
-                    bool success = handleMessage(p, chunk.msg_type_id);
-                    
-                    if(!success) {
-                        ret = 0; break;
+                    switch(chunk.msg_type_id) {
+                        case RTMP_PT_BYTES_READ:
+                        {
+                            printf("received bytes read: %d\n", get_be32(p));
+                        }
+                            break;
+                            
+                        case RTMP_PT_CHUNK_SIZE:
+                        {
+                            unsigned long newChunkSize = get_be32(p);
+                            printf("Request to change incoming chunk size from %zu -> %zu\n", m_inChunkSize, newChunkSize);
+                            m_inChunkSize = newChunkSize;
+                        }
+                            break;
+                            
+                        case RTMP_PT_PING:
+                        {
+                            printf("received ping, sending pong.\n");
+                            sendPong();
+                        }
+                            break;
+                            
+                        case RTMP_PT_SERVER_WINDOW:
+                        {
+                            printf("received server window size: %d\n", get_be32(p));
+                        }
+                            break;
+                            
+                        case RTMP_PT_PEER_BW:
+                        {
+                            printf("received peer bandwidth limit: %d type: %d\n", get_be32(p), p[4]);
+                        }
+                            break;
+                            
+                        case RTMP_PT_INVOKE:
+                        {
+                            printf("Received invoke\n");
+                            handleInvoke(p);
+                        }
+                            break;
+                        case RTMP_PT_VIDEO:
+                        {
+                            printf("received video\n");
+                        }
+                            break;
+                            
+                        case RTMP_PT_AUDIO:
+                        {
+                            printf("received audio\n");
+                        }
+                            break;
+                            
+                        case RTMP_PT_METADATA:
+                        {
+                            printf("received metadata\n");
+                        }
+                            break;
+                            
+                        case RTMP_PT_NOTIFY:
+                        {
+                            printf("received notify\n");
+                        }
+                            break;
+                            
+                        default:
+                        {
+                            printf("received unknown packet type: 0x%02X\n", chunk.msg_type_id);
+                            ret = 0;
+                        }
+                            break;
                     }
+                    
                     p+=chunk.msg_length.data;
                     ret -= chunk.msg_length.data;
                 }
                     break;
                     
-                case RTMP_HEADER_TYPE_NO_MSG_STREAM_ID:
+                case RTMP_HEADER_TYPE_NO_MSGID:
                 {
                     RTMPChunk_1 chunk;
                     memcpy(&chunk, p, sizeof(RTMPChunk_1));
-                    p+=sizeof(chunk);
-                    ret -= sizeof(chunk);
-                    chunk.msg_length.data = get_be24((uint8_t*)&chunk.msg_length);
-                    
-                    bool success = handleMessage(p, chunk.msg_type_id);
-                    if(!success) {
-                        ret = 0; break;
-                    }
-                    p+=chunk.msg_length.data;
-                    ret -= chunk.msg_length.data;
-
+                    p+=sizeof(chunk)+m_inChunkSize;
+                    ret -= sizeof(chunk)+m_inChunkSize;
                 }
                     break;
                     
@@ -759,16 +736,15 @@ namespace videocore
                 {
                     RTMPChunk_2 chunk;
                     memcpy(&chunk, p, sizeof(RTMPChunk_2));
-                    
-                    p+=sizeof(chunk)+std::min(ret, long(m_inChunkSize));
-                    ret -= sizeof(chunk)+std::min(ret, long(m_inChunkSize));
+                    p+=sizeof(chunk)+m_inChunkSize;
+                    ret -= sizeof(chunk)+m_inChunkSize;
                 }
                     break;
                     
                 case RTMP_HEADER_TYPE_ONLY:
                 {
-                    p += std::min(ret, long(m_inChunkSize));
-                    ret -= std::min(ret, long(m_inChunkSize));
+                    p+=m_inChunkSize;
+                    ret -= m_inChunkSize;
                 }
                     break;
                     
@@ -784,29 +760,23 @@ namespace videocore
     void
     RTMPSession::handleInvoke(uint8_t* p)
     {
-        int buflen=0;
-        std::string command = get_string(p, buflen);
-        int32_t pktId = int32_t(get_double(p+11));
-
-        DLog("pktId: %d\n", pktId);
+        std::string command = get_string(p);
+        int32_t pktId = get_double(p+11);
+        //std::string trackedCommand = m_trackedCommands[pktId];
         std::string trackedCommand ;
         auto it = m_trackedCommands.find(pktId) ;
-        
         if(it != m_trackedCommands.end()) {
             trackedCommand = it->second;
         }
-        
-        DLog("received invoke %s\n", command.c_str());
+        printf("received invoke %s\n", command.c_str());
         
         if (command == "_result") {
             printf("tracked command: %s\n", trackedCommand.c_str());
             if (trackedCommand == "connect") {
-                
                 sendReleaseStream();
                 sendFCPublish();
                 sendCreateStream();
                 setClientState(kClientStateFCPublish);
-                
             } else if (trackedCommand == "createStream") {
                 if (p[10] || p[19] != 0x05 || p[20]) {
                     printf("RTMP: Unexpected reply on connect()\n");
@@ -820,7 +790,7 @@ namespace videocore
             std::string code = parseStatusCode(p + 3 + command.length());
             printf("code : %s\n", code.c_str());
             if (code == "NetStream.Publish.Start") {
-                sendSetChunkSize(4096);
+                sendSetChunkSize(1536);
                 sendHeaderPacket();
                 setClientState(kClientStateSessionStarted);
             }
