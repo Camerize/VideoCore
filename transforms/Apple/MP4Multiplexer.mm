@@ -175,7 +175,6 @@ namespace videocore { namespace Apple {
     void
     MP4Multiplexer::pushAudioBuffer(const uint8_t *const data, size_t size, videocore::IMetadata &metadata)
     {
-      //  bool first = false;
         if(!m_audioFormat)
         {
             //first = true;
@@ -191,17 +190,16 @@ namespace videocore { namespace Apple {
             
             CMAudioFormatDescriptionCreate(kCFAllocatorDefault, &asbd, 0, nullptr, size, data, NULL, (CMAudioFormatDescriptionRef*)&m_audioFormat);
             
-        } /*else*/ {
+        } else {
+            
+            CMSampleBufferRef sample;
+            CMBlockBufferRef buffer;
+            CMBlockBufferCreateWithMemoryBlock(kCFAllocatorDefault, (void*)data, size, kCFAllocatorDefault, NULL, 0, size, kCMBlockBufferAssureMemoryNowFlag, &buffer);
             
             double delta=1024/44100.0*1000;
             CMSampleTimingInfo audioSampleTimingInformation =  {CMTimeMake(delta, 1000.), CMTimeMake(audio_pts, 1000.) , kCMTimeInvalid};
 
             audio_pts += delta;
-
-            CMSampleBufferRef sample;
-            CMBlockBufferRef buffer;
-            CMBlockBufferCreateWithMemoryBlock(kCFAllocatorDefault, (void*)data, size, kCFAllocatorDefault, NULL, 0, size, kCMBlockBufferAssureMemoryNowFlag, &buffer);
-
 
             CMSampleBufferCreate(kCFAllocatorDefault,
                                  buffer,
@@ -218,12 +216,16 @@ namespace videocore { namespace Apple {
             CMSampleBufferMakeDataReady(sample);
             
             CFDictionaryRef dict = NULL;
-            /*if (first)*/{
-                 dict = CMTimeCopyAsDictionary(CMTimeMake(1024, 44100), kCFAllocatorDefault);
+  
+            static bool first = true;
+            if (first){
+                first = false;
+                
+                dict = CMTimeCopyAsDictionary(CMTimeMake(1024*2, 44100), kCFAllocatorDefault);
                 
                 CMSetAttachment(sample, kCMSampleBufferAttachmentKey_TrimDurationAtStart, dict, kCMAttachmentMode_ShouldNotPropagate);
             }
-            
+
             AVAssetWriterInput* audio = (AVAssetWriterInput*)m_audioInput;
                 
             if (audio.readyForMoreMediaData){
