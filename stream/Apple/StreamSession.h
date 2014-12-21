@@ -47,10 +47,10 @@ namespace videocore {
             };
         public:
             void nsStreamCallback(void* stream, unsigned event);
+            void startNetwork();
             
         private:
             void setStatus(StreamStatus_t status, bool clear = false);
-            void startNetwork();
         private:
             void*              m_inputStream;
             void*             m_outputStream;

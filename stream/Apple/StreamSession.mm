@@ -35,6 +35,7 @@
 
 @interface NSStreamCallback : NSObject<NSStreamDelegate>
 @property (nonatomic, assign) videocore::Apple::StreamSession* session;
+- (void) startNetwork:(NSString*)test;
 @end
 
 @implementation NSStreamCallback
@@ -42,6 +43,11 @@
 - (void) stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {
     self.session->nsStreamCallback(aStream,static_cast<unsigned>( eventCode ));
+}
+
+- (void) startNetwork:(NSString*)test
+{
+    self.session->startNetwork();
 }
 
 @end
@@ -77,9 +83,15 @@ namespace videocore {
                 m_inputStream = (NSInputStream*)readStream;
                 m_outputStream = (NSOutputStream*)writeStream;
             
+                [SCB(m_streamCallback) performSelectorInBackground:@selector(startNetwork:) withObject:nil];
+                
+                //[self perform];
+                //[[NSThread alloc] init]
+                /*
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     this->startNetwork();
                 });
+                */
             }
 
         }
