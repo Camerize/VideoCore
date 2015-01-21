@@ -56,7 +56,7 @@ typedef struct {
     
     int24_t timestamp;
     int24_t msg_length;
-    int8_t msg_type_id;
+    int8_t 	msg_type_id;
     int msg_stream_id;
     
 } RTMPChunk_0;

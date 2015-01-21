@@ -616,6 +616,236 @@ namespace videocore
             write(&buff[0], buff.size());
         });
     }
+    
+    
+    int RTMPSession::parseSingleMessage(int msg_type_id, int msg_size, const std::vector<uint8_t>& buf, int next) {
+        switch(msg_type_id) {
+            case RTMP_PT_BYTES_READ:
+            {
+                printf("received bytes read: %d\n", get_be32(&buf[next]));
+            }
+                break;
+                
+            case RTMP_PT_CHUNK_SIZE:
+            {
+                unsigned long newChunkSize = get_be32(&buf[next]);
+                printf("Request to change incoming chunk size from %zu -> %zu\n", m_inChunkSize, newChunkSize);
+                m_inChunkSize = newChunkSize;
+            }
+                break;
+                
+            case RTMP_PT_PING:
+            {
+                printf("received ping, sending pong.\n");
+                sendPong();
+            }
+                break;
+                
+            case RTMP_PT_SERVER_WINDOW:
+            {
+                printf("received server window size: %d\n", get_be32(&buf[next]));
+            }
+                break;
+                
+            case RTMP_PT_PEER_BW:
+            {
+                printf("received peer bandwidth limit: %d type: %d\n", get_be32(&buf[next]), buf[next+4]);
+            }
+                break;
+                
+            case RTMP_PT_INVOKE:
+            {
+                printf("Received invoke\n");
+                handleInvoke(&buf[next]);
+            }
+                break;
+            case RTMP_PT_VIDEO:
+            {
+                printf("received video\n");
+            }
+                break;
+                
+            case RTMP_PT_AUDIO:
+            {
+                printf("received audio\n");
+            }
+                break;
+                
+            case RTMP_PT_METADATA:
+            {
+                printf("received metadata\n");
+            }
+                break;
+                
+            case RTMP_PT_NOTIFY:
+            {
+                printf("received notify\n");
+            }
+                break;
+                
+            default:
+            {
+                printf("received unknown packet type: 0x%02X\n", msg_type_id);
+                return -1;
+            }
+                break;
+        }
+        
+        return next + msg_size;
+    }
+    
+    int RTMPSession::parseSingleChunk(int chunk_stream_id, int msg_type_id, int msg_size, const std::vector<uint8_t>& buf, size_t len, int next) {
+        if (msg_size > m_inChunkSize) {
+            //printf("Chunked packet\n");
+            
+            if ((next + m_inChunkSize) > len) {
+                //printf("Buffer missing data ...\n");
+                return 0;
+            }
+            
+            assert( 0 == m_previousInChunkData.count( chunk_stream_id));
+            
+            m_previousInChunkData[chunk_stream_id] = std::vector<uint8_t>();
+            m_previousInChunkData[chunk_stream_id].insert(m_previousInChunkData[chunk_stream_id].begin(),
+                                                          buf.begin()+next, buf.begin() + next + m_inChunkSize);
+            m_previousInChunkLen[chunk_stream_id] = msg_size;
+            m_previousInChunkTypeId[chunk_stream_id] = msg_type_id;
+            
+            return next + m_inChunkSize;
+        } else if ((next + msg_size) > len) {
+            printf("Buffer missing data ...\n");
+            return 0;
+        } else {
+            assert( 0 == m_previousInChunkData.count( chunk_stream_id ));
+        }
+        
+        return parseSingleMessage(msg_type_id, msg_size, buf, next);
+    }
+    
+    /*
+     rv
+       > 0 -> bytes consumed
+       = 0 -> not handled
+       = -1 -> error in parsing
+     */
+    int RTMPSession::parseSingleBS(const std::vector<uint8_t>& buf, size_t len) {
+        
+        int next = 0;
+        
+        int header_type = (buf[next] & 0xC0) >> 6;
+        int chunk_stream_id = (buf[next] & 0x3F);
+        
+        assert(chunk_stream_id >= 2);    //we only support chunk streams 2-63, BH format 0
+        
+        next++;
+        
+        switch(header_type) {
+            case RTMP_HEADER_TYPE_FULL:
+            {
+                //No support for chunk continuation w/ BS/0
+                assert(0 == m_previousInChunkData.count(chunk_stream_id));
+
+                if ((next + 11) > len) {
+                    //printf("PARTIAL CHUNK\n");
+                    return 0;
+                }
+                
+                RTMPChunk_0 chunk;
+                memcpy(&chunk, &buf[next], sizeof(RTMPChunk_0));
+                chunk.msg_length.data = get_be24((uint8_t*)&chunk.msg_length);
+                
+                //printf("Received chunk of type %d (%d)\n", chunk.msg_type_id, chunk.msg_length.data);
+                next+=sizeof(chunk);
+                
+                assert(chunk.timestamp.data != 0xFFFFFF); // We only support 3 byte timestamps
+                
+                return parseSingleChunk(chunk_stream_id, chunk.msg_type_id, chunk.msg_length.data, buf, len, next);                
+            }
+                break;
+                
+            case RTMP_HEADER_TYPE_NO_MSGID:
+            {
+                //No support for chunk continuation w/ BS/1
+                assert(0 == m_previousInChunkData.count(chunk_stream_id));
+
+                if ((next + 7) > len) {
+                    //printf("PARTIAL CHUNK\n");
+                    return 0;
+                }
+                
+                //delta, len, typeid
+                int delta = get_be24(&buf[next]);
+                next+=3;
+                
+                int msg_length = get_be24(&buf[next]);
+                next+=3;
+                
+                int msg_type_id = buf[next];
+                next+=1;
+                
+                return parseSingleChunk(chunk_stream_id, msg_type_id, msg_length, buf, len, next);
+            }
+                break;
+                
+            case RTMP_HEADER_TYPE_TIMESTAMP:
+            {
+                //No support for chunk continuation w/ BS/2
+                assert(0 == m_previousInChunkData.count(chunk_stream_id));
+                if ((next + 3) > len) {
+                    //printf("PARTIAL CHUNK\n");
+                    return 0;
+                }
+                
+                //only delta
+                int delta = get_be24(&buf[next]);
+                next+=3;
+                
+                return parseSingleChunk(chunk_stream_id, m_previousInChunkTypeId[chunk_stream_id], m_previousInChunkLen[chunk_stream_id], buf, len, next);
+            }
+                break;
+                
+            case RTMP_HEADER_TYPE_ONLY:
+            {
+                //Only continuation supported for BS/3
+                assert(0 != m_previousInChunkData.count(chunk_stream_id));
+
+                auto& data = m_previousInChunkData[chunk_stream_id];
+                auto size = m_previousInChunkLen[chunk_stream_id];
+                auto typeId = m_previousInChunkTypeId[chunk_stream_id];
+                
+                auto remain = size-data.size();
+                
+                auto used = std::min(m_inChunkSize, remain);
+                
+                if ((next + used) > len) {
+                    //printf("PARTIAL CHUNK\n");
+                    return 0;
+                }
+                
+                data.insert(data.end(), buf.begin() + next, buf.begin() + next + used);
+                
+                if (used == remain) {
+                    //printf("Processing CHUNKED\n");
+                    assert(data.size() == size);
+                    
+                    parseSingleMessage(typeId, size, data, 0);
+                    
+                    //keep non-data
+                    m_previousInChunkData.erase(chunk_stream_id);
+                    //m_previousInChunkLen.erase(chunk_stream_id);
+                    //m_previousInChunkTypeId.erase(chunk_stream_id);
+                }
+                next += used;
+            }
+                break;
+                
+            default:
+                return false;
+        }
+        
+        return next;
+    }
+    
     bool
     RTMPSession::parseCurrentData()
     {
@@ -627,11 +857,35 @@ namespace videocore
         
         long ret = m_streamInBuffer->get(p, size, false);
         
+        m_recvBuffer.insert(m_recvBuffer.end(), buf, buf+ret);
+        
+        while (m_recvBuffer.size()) {
+            int state = parseSingleBS(m_recvBuffer, m_recvBuffer.size());
+            
+            if (state == 0)
+                break;
+            else if (state == -1) {
+                printf("FATAL ERROR PARSING BUFFER\n");
+                //should drop the connection, almost no hope of recovery here
+                m_recvBuffer.clear();
+                return false;
+            }
+            else {
+                assert(state <= m_recvBuffer.size());
+                m_recvBuffer.erase(m_recvBuffer.begin(), m_recvBuffer.begin() + state);
+            }
+        }
+        
+        return true;
+        
+        printf("Parsing %d (%d) bytes\n", ret, size);
+        
         start = p;
         
         if(!p) return false;
         
         while (ret>0) {
+            printf("New pkt in: %d\n", p - start);
             int header_type = (p[0] & 0xC0) >> 6;
             p++;
             ret--;
@@ -722,7 +976,7 @@ namespace videocore
                     ret -= chunk.msg_length.data;
                 }
                     break;
-                    
+                    	
                 case RTMP_HEADER_TYPE_NO_MSGID:
                 {
                     RTMPChunk_1 chunk;
@@ -758,7 +1012,7 @@ namespace videocore
     }
     
     void
-    RTMPSession::handleInvoke(uint8_t* p)
+    RTMPSession::handleInvoke(const uint8_t* p)
     {
         std::string command = get_string(p);
         int32_t pktId = get_double(p+11);
@@ -798,8 +1052,8 @@ namespace videocore
         
     }
     
-    std::string RTMPSession::parseStatusCode(uint8_t *p) {
-        uint8_t *start = p;
+    std::string RTMPSession::parseStatusCode(const uint8_t *p) {
+        const uint8_t *start = p;
         std::map<std::string, std::string> props;
         
         // skip over the packet id
@@ -851,7 +1105,7 @@ namespace videocore
         return props["code"];
     }
     
-    int32_t RTMPSession::amfPrimitiveObjectSize(uint8_t* p) {
+    int32_t RTMPSession::amfPrimitiveObjectSize(const uint8_t* p) {
         switch(p[0]) {
             case AMF_DATA_TYPE_NUMBER:       return 9;
             case AMF_DATA_TYPE_BOOL:         return 2;

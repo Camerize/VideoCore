@@ -77,7 +77,7 @@ static inline void put_be16(std::vector<uint8_t>& data, short val)
     
     put_buff(data,(const uint8_t*)buf,sizeof(uint16_t));
 }
-static inline int get_be16(uint8_t* val) {
+static inline int get_be16(const uint8_t* val) {
     return ((val[0]&0xff) << 8) | ((val[1]&0xff)) ;
 }
 static inline void put_be24(std::vector<uint8_t>& data, int32_t val)
@@ -91,7 +91,7 @@ static inline void put_be24(std::vector<uint8_t>& data, int32_t val)
     put_buff(data, (const uint8_t*)buf, 3);
     
 }
-static inline int get_be24(uint8_t* val) {
+static inline int get_be24(const uint8_t* val) {
     int ret = ((val[2]&0xff)) | ((val[1]&0xff) << 8) | ((val[0]&0xff)<<16) ;
     return ret;
 }
@@ -106,7 +106,7 @@ static inline void put_be32(std::vector<uint8_t>& data, int32_t val)
 
     put_buff(data, (const uint8_t*)buf, sizeof(int32_t));
 }
-static inline int get_be32(uint8_t* val) {
+static inline int get_be32(const uint8_t* val) {
     return ((val[0]&0xff)<<24) | ((val[1]&0xff)<<16) | ((val[2]&0xff) << 8) | ((val[3]&0xff)) ;
 }
 
@@ -127,7 +127,7 @@ static inline void put_string(std::vector<uint8_t>& data, std::string string) {
     }
     put_buff(data, (const uint8_t*)string.c_str(), string.length());
 }
-static inline std::string get_string(uint8_t* buf) {
+static inline std::string get_string(const uint8_t* buf) {
     int len = 0;
     if(*buf++ == kAMFString) {
         len = get_be16(buf);
@@ -146,7 +146,7 @@ static inline void put_double(std::vector<uint8_t>& data, double val) {
     
     put_buff(data, (uint8_t*)&buf, sizeof(CFSwappedFloat64));
 }
-static inline double get_double(uint8_t* buf) {
+static inline double get_double(const uint8_t* buf) {
     CFSwappedFloat64 arg;
     memcpy(&arg, buf, sizeof(arg));
     return CFConvertDoubleSwappedToHost(arg);
