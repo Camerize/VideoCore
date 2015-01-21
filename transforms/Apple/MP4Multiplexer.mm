@@ -217,9 +217,9 @@ namespace videocore { namespace Apple {
             
             CFDictionaryRef dict = NULL;
   
-            static bool first = true;
-            if (first){
-                first = false;
+            //static bool first = true;
+            if (true){
+            //    first = false;
                 
                 dict = CMTimeCopyAsDictionary(CMTimeMake(1024*2, 44100), kCFAllocatorDefault);
                 
