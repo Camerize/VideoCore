@@ -116,13 +116,17 @@ namespace videocore
         void increaseBuffer(int64_t size);
         
         bool parseCurrentData();
-        void handleInvoke(uint8_t* p);
-        bool handleMessage(uint8_t* p, uint8_t msgTypeId);
         
-        std::string parseStatusCode(uint8_t *p);
-        int32_t amfPrimitiveObjectSize(uint8_t* p);
+        void handleInvoke(const uint8_t* p);
+        std::string parseStatusCode(const uint8_t *p);
+        int32_t amfPrimitiveObjectSize(const uint8_t* p);
         
     private:
+        
+        int parseSingleBS(const std::vector<uint8_t>& buf, size_t len);
+        int parseSingleMessage(int msg_type_id, int msg_size, const std::vector<uint8_t>& buf, int next);
+        int parseSingleChunk(int chunk_stream_id, int msg_type_id, int msg_size, const std::vector<uint8_t>& buf, size_t len, int next);
+        
         JobQueue            m_networkQueue;
         JobQueue            m_jobQueue;
         std::chrono::steady_clock::time_point m_sentKeyframe;
@@ -139,6 +143,14 @@ namespace videocore
         std::deque<BufStruct> m_streamOutQueue;
         
         std::map<int, uint64_t>             m_previousChunkData;
+        
+        //this is real hacky, should make a struct
+        std::map<int, std::vector<uint8_t>> m_previousInChunkData;
+        std::map<int, std::size_t>          m_previousInChunkLen;
+        std::map<int, std::size_t>          m_previousInChunkTypeId;
+        
+        std::vector<uint8_t>                m_recvBuffer;
+        
         std::unique_ptr<RingBuffer>         m_streamInBuffer;
         std::unique_ptr<IStreamSession>     m_streamSession;
         std::vector<uint8_t> m_outBuffer;
