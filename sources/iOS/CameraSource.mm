@@ -357,7 +357,7 @@ namespace videocore { namespace iOS {
                         // UIInterfaceOrientationPortraitUpsideDown, UIDeviceOrientationPortraitUpsideDown
                     case UIInterfaceOrientationPortraitUpsideDown:
                         if(av.videoOrientation != AVCaptureVideoOrientationPortraitUpsideDown) {
-                            av.videoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
+                            //av.videoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
                             reorient = true;
                         }
                         break;
@@ -371,14 +371,18 @@ namespace videocore { namespace iOS {
                         // UIInterfaceOrientationLandscapeLeft, UIDeviceOrientationLandscapeRight
                     case UIInterfaceOrientationLandscapeLeft:
                         if(av.videoOrientation != AVCaptureVideoOrientationLandscapeLeft) {
+                            //if recording
                             av.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
                             reorient = true;
+                            //else
+                            //av.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+                            //reorient = true;
                         }
                         break;
                         // UIInterfaceOrientationPortrait, UIDeviceOrientationPortrait
                     case UIInterfaceOrientationPortrait:
                         if(av.videoOrientation != AVCaptureVideoOrientationPortrait) {
-                            av.videoOrientation = AVCaptureVideoOrientationPortrait;
+                            //av.videoOrientation = AVCaptureVideoOrientationPortrait;
                             reorient = true;
                         }
                         break;
