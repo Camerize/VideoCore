@@ -139,6 +139,7 @@ namespace videocore { namespace iOS {
         /*! Used by Objective-C Device/Interface Orientation Notifications */
         void reorientCamera();
         
+        BOOL isRecording;
     private:
         
         /*! 

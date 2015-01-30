@@ -352,7 +352,6 @@ namespace videocore { namespace iOS {
         
         for (AVCaptureVideoDataOutput* output in session.outputs) {
             for (AVCaptureConnection * av in output.connections) {
-                
                 switch (orientation) {
                         // UIInterfaceOrientationPortraitUpsideDown, UIDeviceOrientationPortraitUpsideDown
                     case UIInterfaceOrientationPortraitUpsideDown:
@@ -364,19 +363,20 @@ namespace videocore { namespace iOS {
                         // UIInterfaceOrientationLandscapeRight, UIDeviceOrientationLandscapeLeft
                     case UIInterfaceOrientationLandscapeRight:
                         if(av.videoOrientation != AVCaptureVideoOrientationLandscapeRight) {
-                            av.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
-                            reorient = true;
+                            if (isRecording == NO) {
+                                av.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
+                                reorient = true;
+                            }
                         }
                         break;
                         // UIInterfaceOrientationLandscapeLeft, UIDeviceOrientationLandscapeRight
                     case UIInterfaceOrientationLandscapeLeft:
                         if(av.videoOrientation != AVCaptureVideoOrientationLandscapeLeft) {
                             //if recording
-                            av.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
-                            reorient = true;
-                            //else
-                            //av.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
-                            //reorient = true;
+                            if (isRecording == NO) {
+                                av.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+                                reorient = true;
+                            }
                         }
                         break;
                         // UIInterfaceOrientationPortrait, UIDeviceOrientationPortrait
