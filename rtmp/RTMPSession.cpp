@@ -65,12 +65,18 @@ namespace videocore
             if(tokenCount == 3) {
                 m_app = *it;
             } else {
-                pp << *it << "/";
+                if (tokenCount > 4)
+                    pp << "/";
+                pp << *it;
             }
         }
         
+        if(m_uri.search.length() > 0) {
+            pp << "?" << m_uri.search;
+            m_app += "?" + m_uri.search;
+        }
+
         m_playPath = pp.str();
-        m_playPath.pop_back();
         
         long port = (m_uri.port > 0) ? m_uri.port : 1935;
         
