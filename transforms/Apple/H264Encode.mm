@@ -100,7 +100,7 @@ namespace videocore { namespace Apple {
         
     }
 #endif
-    H264Encode::H264Encode( int frame_w, int frame_h, int fps, int bitrate, bool useBaseline )
+    H264Encode::H264Encode( int frame_w, int frame_h, int fps, int bitrate, bool useBaseline, bool, int ) /* FIXME arguments */
     : m_frameW(frame_w), m_frameH(frame_h), m_fps(fps), m_bitrate(bitrate), m_forceKeyframe(false)
     {
         setupCompressionSession( useBaseline );

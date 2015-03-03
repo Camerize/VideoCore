@@ -50,6 +50,7 @@ namespace videocore { namespace Apple {
         void setSessionParameters(IMetadata & parameters) ;
         void pushBuffer(const uint8_t* const data, size_t size, IMetadata& metadata);
         void setEpoch(const std::chrono::steady_clock::time_point epoch) { m_epoch = epoch; };
+        void setBandwidthCallback(BandwidthCallback callback) { };
         
     private:
         void pushVideoBuffer(const uint8_t* const data, size_t size, IMetadata& metadata);
