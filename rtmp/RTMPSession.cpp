@@ -129,10 +129,7 @@ namespace videocore
 
         m_jobQueue.enqueue([=]() {
             
-            if(!this->m_ending) {
-                static int c_count = 0;
-                c_count ++;
-                
+            if(!this->m_ending) {                
                 auto packetTime = std::chrono::steady_clock::now();
                 
                 std::vector<uint8_t> chunk;
