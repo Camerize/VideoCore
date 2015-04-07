@@ -140,6 +140,7 @@ namespace videocore { namespace iOS {
         void reorientCamera();
         
         BOOL isRecording;
+        BOOL cameraSwitchedAndNeedsReorient;
     private:
         
         /*! 
