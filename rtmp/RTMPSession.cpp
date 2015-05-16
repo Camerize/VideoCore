@@ -171,9 +171,9 @@ namespace videocore
                 
                 while(len > 0) {
                     tosend = std::min(len, m_outChunkSize);
-                    p[-1] = RTMP_CHUNK_TYPE_3 | (streamId & 0x1F);
-                    
-                    outb->insert(outb->end(), p-1, p+tosend);
+                    uint8_t head = RTMP_CHUNK_TYPE_3 | (streamId & 0x1F);
+                    outb->insert(outb->end(), &head, &head+1);
+                    outb->insert(outb->end(), p, p+tosend);
                     p+=tosend;
                     len-=tosend;
                     //  this->write(&outb[0], outb.size(), packetTime);
@@ -222,7 +222,7 @@ namespace videocore
                 size_t tosend = size;
                 uint8_t* p ;
                 buf->read(&p, size);
-                
+
                 while(tosend > 0 && !this->m_ending && (!this->m_clearing || this->m_sentKeyframe == packetTime)) {
                     this->m_clearing = false;
                     size_t sent = m_streamSession->write(p, tosend);
@@ -244,8 +244,7 @@ namespace videocore
     void
     RTMPSession::dataReceived()
     {
-        
-        static uint8_t buffer[4096] = {0};
+        uint8_t buffer[4096] = {0};
         bool stop1 = false;
         bool stop2 = false;
         do {
@@ -272,7 +271,6 @@ namespace videocore
                     case kClientStateHandshake1s1:
                     {
                         if(m_streamInBuffer->size() >= kRTMPSignatureSize) {
-                            
                             uint8_t buf[kRTMPSignatureSize];
                             size_t size = m_streamInBuffer->get(buf, kRTMPSignatureSize);
                             m_s1.resize(size);
@@ -749,10 +747,19 @@ namespace videocore
         
         int header_type = (buf[next] & 0xC0) >> 6;
         int chunk_stream_id = (buf[next] & 0x3F);
-        
-        assert(chunk_stream_id >= 2);    //we only support chunk streams 2-63, BH format 0
-        
         next++;
+        
+        assert(chunk_stream_id == 0 || chunk_stream_id >= 2);    //we only support chunk streams 2-63, BH format 0
+        
+        if (chunk_stream_id == 0) {
+            if (next + 1 > len) {
+                //DLog("PARTIAL CHUNK");
+                return 0;
+            }
+            
+            chunk_stream_id = buf[next++];
+        }
+        
         
         switch(header_type) {
             case RTMP_HEADER_TYPE_FULL:
@@ -769,7 +776,7 @@ namespace videocore
                 memcpy(&chunk, &buf[next], sizeof(RTMPChunk_0));
                 chunk.msg_length.data = get_be24((uint8_t*)&chunk.msg_length);
                 
-                //DLog("Received chunk of type %d (%d)\n", chunk.msg_type_id, chunk.msg_length.data);
+                DLog("Received chunk of type %d (%d)\n", chunk.msg_type_id, chunk.msg_length.data);
                 next+=sizeof(chunk);
                 
                 assert(chunk.timestamp.data != 0xFFFFFF); // We only support 3 byte timestamps
