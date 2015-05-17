@@ -53,6 +53,20 @@ typedef NS_ENUM(NSInteger, VCCameraState)
     VCCameraStateBack
 };
 
+typedef NS_ENUM(NSInteger, VCAspectMode)
+{
+    VCAspectModeFit,
+    VCAscpectModeFill
+};
+
+//With new filters should add an enum here
+typedef NS_ENUM(NSInteger, VCFilter) {
+    VCFilterNormal,
+    VCFilterGray,
+    VCFilterInvertColors,
+    VCFilterSepia
+};
+
 @protocol VCSessionDelegate <NSObject>
 @required
 - (void) connectionStatusChanged: (VCSessionState) sessionState;
@@ -84,6 +98,9 @@ typedef NS_ENUM(NSInteger, VCCameraState)
 @property (nonatomic, assign) BOOL          continuousExposure;
 @property (nonatomic, assign) BOOL          useAdaptiveBitrate;     /* Default is off */
 @property (nonatomic, readonly) int         estimatedThroughput;    /* Bytes Per Second. */
+@property (nonatomic, assign) VCAspectMode  aspectMode;
+
+@property (nonatomic, assign) VCFilter      filter; /* Default is VCFilterNormal*/
 
 @property (nonatomic, assign) id<VCSessionDelegate> delegate;
 
@@ -106,11 +123,30 @@ typedef NS_ENUM(NSInteger, VCCameraState)
                        cameraState:(VCCameraState) cameraState;
 
 // -----------------------------------------------------------------------------
+- (instancetype) initWithVideoSize:(CGSize)videoSize
+                         frameRate:(int)fps
+                           bitrate:(int)bps
+           useInterfaceOrientation:(BOOL)useInterfaceOrientation
+                       cameraState:(VCCameraState) cameraState
+                        aspectMode:(VCAspectMode) aspectMode;
+
+// -----------------------------------------------------------------------------
+
 - (void) startRtmpSessionWithURL:(NSString*) rtmpUrl
                     andStreamKey:(NSString*) streamKey;
 
 - (void) endRtmpSession;
 
 - (void) getCameraPreviewLayer: (AVCaptureVideoPreviewLayer**) previewLayer;
+
+/*!
+ *  Note that the rect you provide should be based on your video dimensions.  The origin
+ *  of the image will be the center of the image (so if you put 0,0 as its position, it will
+ *  basically end up with the bottom-right quadrant of the image hanging out at the top-left corner of
+ *  your video)
+ */
+
+- (void) addPixelBufferSource: (UIImage*) image
+                     withRect: (CGRect) rect;
 
 @end

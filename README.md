@@ -102,6 +102,13 @@ videocore::Apple::StreamSession : videocore::IStreamSession
 
 ##Version History
 
+* 0.3.1
+    * Various bugfixes
+    * Introduction of pixel buffer sources so you can add images to broadcast.
+* 0.3.0
+    * Improvements to audio/video timestamps and synchronization
+    * Adds an incompatible API call with previous versions.  Custom
+    * graphs must now call IMixer::start() to begin mixing.
 * 0.2.3
     * Add support for image filters
 * 0.2.2

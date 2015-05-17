@@ -1,5 +1,5 @@
 
-#include <videocore/filters/Basic/GrayscaleVideoFilter.h>
+#include <videocore/filters/Basic/SepiaVideoFilter.h>
 
 #include <TargetConditionals.h>
 
@@ -15,28 +15,28 @@
 
 namespace videocore { namespace filters {
  
-    bool GrayscaleVideoFilter::s_registered = GrayscaleVideoFilter::registerFilter();
+    bool SepiaVideoFilter::s_registered = SepiaVideoFilter::registerFilter();
     
     bool
-    GrayscaleVideoFilter::registerFilter()
+    SepiaVideoFilter::registerFilter()
     {
-        FilterFactory::_register("com.videocore.filters.grayscale", []() { return new GrayscaleVideoFilter(); });
+        FilterFactory::_register("com.videocore.filters.sepia", []() { return new SepiaVideoFilter(); });
         return true;
     }
     
-    GrayscaleVideoFilter::GrayscaleVideoFilter()
+    SepiaVideoFilter::SepiaVideoFilter()
     : IVideoFilter(), m_initialized(false), m_bound(false)
     {
         
     }
-    GrayscaleVideoFilter::~GrayscaleVideoFilter()
+    SepiaVideoFilter::~SepiaVideoFilter()
     {
         glDeleteProgram(m_program);
-        glDeleteVertexArraysOES(1, &m_vao);
+        glDeleteVertexArrays(1, &m_vao);
     }
     
     const char * const
-    GrayscaleVideoFilter::vertexKernel() const
+    SepiaVideoFilter::vertexKernel() const
     {
         
         KERNEL(GL_ES2_3, m_language,
@@ -54,31 +54,34 @@ namespace videocore { namespace filters {
     }
     
     const char * const
-    GrayscaleVideoFilter::pixelKernel() const
+    SepiaVideoFilter::pixelKernel() const
     {
         
          KERNEL(GL_ES2_3, m_language,
                precision mediump float;
                varying vec2      vCoord;
                uniform sampler2D uTex0;
+               const vec3 SEPIA = vec3(1.2, 1.0, 0.8);
                void main(void) {
                    vec4 color = texture2D(uTex0, vCoord);
                    float gray = dot(color.rgb, vec3(0.3, 0.59, 0.11));
-                   gl_FragColor = vec4(gray, gray, gray, color.a);
+                   vec3 sepiaColor = vec3(gray) * SEPIA;
+                   color.rgb = mix(color.rgb, sepiaColor, 0.75);
+                   gl_FragColor = color;
                }
         )
         
         return nullptr;
     }
     void
-    GrayscaleVideoFilter::initialize()
+    SepiaVideoFilter::initialize()
     {
         switch(m_language) {
             case GL_ES2_3:
             case GL_2: {
                 setProgram(build_program(vertexKernel(), pixelKernel()));
-                glGenVertexArraysOES(1, &m_vao);
-                glBindVertexArrayOES(m_vao);
+                glGenVertexArrays(1, &m_vao);
+                glBindVertexArray(m_vao);
                 m_uMatrix = glGetUniformLocation(m_program, "uMat");
                 int attrpos = glGetAttribLocation(m_program, "aPos");
                 int attrtex = glGetAttribLocation(m_program, "aCoord");
@@ -96,7 +99,7 @@ namespace videocore { namespace filters {
         }
     }
     void
-    GrayscaleVideoFilter::bind()
+    SepiaVideoFilter::bind()
     {
         switch(m_language) {
             case GL_ES2_3:
@@ -106,7 +109,7 @@ namespace videocore { namespace filters {
                         initialize();
                     }
                     glUseProgram(m_program);
-                    glBindVertexArrayOES(m_vao);
+                    glBindVertexArray(m_vao);
                 }
                 glUniformMatrix4fv(m_uMatrix, 1, GL_FALSE, &m_matrix[0][0]);
                 break;
@@ -115,7 +118,7 @@ namespace videocore { namespace filters {
         }
     }
     void
-    GrayscaleVideoFilter::unbind()
+    SepiaVideoFilter::unbind()
     {
         m_bound = false;
     }

@@ -22,17 +22,18 @@
  THE SOFTWARE.
  
  */
-#import <UIKit/UIKit.h>
-#import <GLKit/GLKit.h>
 
+//
+//  VideoCore-Bridging-Header.h
+//  SampleBroadcaster-Swift
+//
+//  Created by Josh Lieberman on 4/11/15.
+//  Copyright (c) 2015 videocore. All rights reserved.
+//
 
-@interface ViewController : UIViewController
+#ifndef SampleBroadcaster_Swift_VideoCore_Bridging_Header_h
+#define SampleBroadcaster_Swift_VideoCore_Bridging_Header_h
 
+#import "VCSimpleSession.h"
 
-@property (retain, nonatomic) IBOutlet UIView *previewView;
-@property (retain, nonatomic) IBOutlet UIButton *btnConnect;
-
-- (IBAction)btnConnectTouch:(id)sender;
-- (IBAction)btnFilterTouch:(id)sender;
-
-@end
+#endif

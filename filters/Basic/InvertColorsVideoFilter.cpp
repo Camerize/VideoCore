@@ -1,5 +1,5 @@
 
-#include <videocore/filters/Basic/GrayscaleVideoFilter.h>
+#include <videocore/filters/Basic/InvertColorsVideoFilter.h>
 
 #include <TargetConditionals.h>
 
@@ -15,28 +15,28 @@
 
 namespace videocore { namespace filters {
  
-    bool GrayscaleVideoFilter::s_registered = GrayscaleVideoFilter::registerFilter();
+    bool InvertColorsVideoFilter::s_registered = InvertColorsVideoFilter::registerFilter();
     
     bool
-    GrayscaleVideoFilter::registerFilter()
+    InvertColorsVideoFilter::registerFilter()
     {
-        FilterFactory::_register("com.videocore.filters.grayscale", []() { return new GrayscaleVideoFilter(); });
+        FilterFactory::_register("com.videocore.filters.invertColors", []() { return new InvertColorsVideoFilter(); });
         return true;
     }
     
-    GrayscaleVideoFilter::GrayscaleVideoFilter()
+    InvertColorsVideoFilter::InvertColorsVideoFilter()
     : IVideoFilter(), m_initialized(false), m_bound(false)
     {
         
     }
-    GrayscaleVideoFilter::~GrayscaleVideoFilter()
+    InvertColorsVideoFilter::~InvertColorsVideoFilter()
     {
         glDeleteProgram(m_program);
-        glDeleteVertexArraysOES(1, &m_vao);
+        glDeleteVertexArrays(1, &m_vao);
     }
     
     const char * const
-    GrayscaleVideoFilter::vertexKernel() const
+    InvertColorsVideoFilter::vertexKernel() const
     {
         
         KERNEL(GL_ES2_3, m_language,
@@ -54,7 +54,7 @@ namespace videocore { namespace filters {
     }
     
     const char * const
-    GrayscaleVideoFilter::pixelKernel() const
+    InvertColorsVideoFilter::pixelKernel() const
     {
         
          KERNEL(GL_ES2_3, m_language,
@@ -63,22 +63,21 @@ namespace videocore { namespace filters {
                uniform sampler2D uTex0;
                void main(void) {
                    vec4 color = texture2D(uTex0, vCoord);
-                   float gray = dot(color.rgb, vec3(0.3, 0.59, 0.11));
-                   gl_FragColor = vec4(gray, gray, gray, color.a);
+                   gl_FragColor = vec4(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, color.a);
                }
         )
         
         return nullptr;
     }
     void
-    GrayscaleVideoFilter::initialize()
+    InvertColorsVideoFilter::initialize()
     {
         switch(m_language) {
             case GL_ES2_3:
             case GL_2: {
                 setProgram(build_program(vertexKernel(), pixelKernel()));
-                glGenVertexArraysOES(1, &m_vao);
-                glBindVertexArrayOES(m_vao);
+                glGenVertexArrays(1, &m_vao);
+                glBindVertexArray(m_vao);
                 m_uMatrix = glGetUniformLocation(m_program, "uMat");
                 int attrpos = glGetAttribLocation(m_program, "aPos");
                 int attrtex = glGetAttribLocation(m_program, "aCoord");
@@ -96,7 +95,7 @@ namespace videocore { namespace filters {
         }
     }
     void
-    GrayscaleVideoFilter::bind()
+    InvertColorsVideoFilter::bind()
     {
         switch(m_language) {
             case GL_ES2_3:
@@ -106,7 +105,7 @@ namespace videocore { namespace filters {
                         initialize();
                     }
                     glUseProgram(m_program);
-                    glBindVertexArrayOES(m_vao);
+                    glBindVertexArray(m_vao);
                 }
                 glUniformMatrix4fv(m_uMatrix, 1, GL_FALSE, &m_matrix[0][0]);
                 break;
@@ -115,7 +114,7 @@ namespace videocore { namespace filters {
         }
     }
     void
-    GrayscaleVideoFilter::unbind()
+    InvertColorsVideoFilter::unbind()
     {
         m_bound = false;
     }

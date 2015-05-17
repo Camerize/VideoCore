@@ -100,8 +100,8 @@ namespace videocore { namespace Apple {
         
     }
 #endif
-    H264Encode::H264Encode( int frame_w, int frame_h, int fps, int bitrate, bool useBaseline, bool, int ) /* FIXME arguments */
-    : m_frameW(frame_w), m_frameH(frame_h), m_fps(fps), m_bitrate(bitrate), m_forceKeyframe(false)
+    H264Encode::H264Encode( int frame_w, int frame_h, int fps, int bitrate, bool useBaseline, int ctsOffset, bool, int ) /* FIXME arguments */
+    : m_frameW(frame_w), m_frameH(frame_h), m_fps(fps), m_bitrate(bitrate), m_forceKeyframe(false), m_ctsOffset(ctsOffset)
     {
         setupCompressionSession( useBaseline );
     }
@@ -116,8 +116,8 @@ namespace videocore { namespace Apple {
         if(m_compressionSession) {
             m_encodeMutex.lock();
             VTCompressionSessionRef session = (VTCompressionSessionRef)m_compressionSession;
-            
-            CMTime pts = CMTimeMake(metadata.timestampDelta, 1000.); // timestamp is in ms.
+
+            CMTime pts = CMTimeMake(metadata.timestampDelta + m_ctsOffset, 1000.); // timestamp is in ms.
             CMTime dur = CMTimeMake(1, m_fps);
             VTEncodeInfoFlags flags;
             
@@ -147,6 +147,7 @@ namespace videocore { namespace Apple {
     void
     H264Encode::setupCompressionSession( bool useBaseline )
     {
+        m_baseline = useBaseline;
         
 #if VERSION_OK
         // Parts of this code pulled from https://github.com/galad87/HandBrake-QuickSync-Mac/blob/2c1332958f7095c640cbcbcb45ffc955739d5945/libhb/platform/macosx/encvt_h264.c
@@ -221,7 +222,7 @@ namespace videocore { namespace Apple {
         }
         
         if(err == noErr) {
-            CFBooleanRef allowFrameReodering = useBaseline ? kCFBooleanFalse : kCFBooleanFalse;
+            CFBooleanRef allowFrameReodering = useBaseline ? kCFBooleanFalse : kCFBooleanTrue;
             err = VTSessionSetProperty(session , kVTCompressionPropertyKey_AllowFrameReordering, allowFrameReodering);
         }
         
@@ -240,6 +241,9 @@ namespace videocore { namespace Apple {
             CFStringRef profileLevel = useBaseline ? kVTProfileLevel_H264_Baseline_AutoLevel : kVTProfileLevel_H264_Main_AutoLevel;
             
             err = VTSessionSetProperty(session, kVTCompressionPropertyKey_ProfileLevel, profileLevel);
+        }
+        if(!useBaseline) {
+            VTSessionSetProperty(session, kVTCompressionPropertyKey_H264EntropyMode, kVTH264EntropyMode_CABAC);
         }
         if(err == noErr) {
             VTCompressionSessionPrepareToEncodeFrames(session);

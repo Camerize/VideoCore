@@ -22,17 +22,42 @@
  THE SOFTWARE.
  
  */
-#import <UIKit/UIKit.h>
-#import <GLKit/GLKit.h>
+#ifndef videocore_SepiaVideoFilter_h
+#define videocore_SepiaVideoFilter_h
+#include <videocore/filters/IVideoFilter.hpp>
 
+namespace videocore {
+    namespace filters {
+        class SepiaVideoFilter : public IVideoFilter {
+            
+        public:
+            SepiaVideoFilter();
+            ~SepiaVideoFilter();
+        
+        public:
+            virtual void initialize();
+            virtual bool initialized() const { return m_initialized; };
+            virtual std::string const name() { return "com.videocore.filters.sepia"; };
+            virtual void bind();
+            virtual void unbind();
+            
+        public:
+            
+            const char * const vertexKernel() const ;
+            const char * const pixelKernel() const ;
+            
+        private:
+            static bool registerFilter();
+            static bool s_registered;
+        private:
 
-@interface ViewController : UIViewController
+            unsigned int m_vao;
+            unsigned int m_uMatrix;
+            bool m_initialized;
+            bool m_bound;
+            
+        };
+    }
+}
 
-
-@property (retain, nonatomic) IBOutlet UIView *previewView;
-@property (retain, nonatomic) IBOutlet UIButton *btnConnect;
-
-- (IBAction)btnConnectTouch:(id)sender;
-- (IBAction)btnFilterTouch:(id)sender;
-
-@end
+#endif /* defined(videocore_SepiaVideoFilter_h) */

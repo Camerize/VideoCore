@@ -93,6 +93,7 @@ namespace videocore {
                 else {
                     nsStreamCallback(nullptr, NSStreamEventErrorOccurred);
                 }
+                dispatch_release(queue);
             }
 
         }
@@ -101,11 +102,17 @@ namespace videocore {
         StreamSession::disconnect()
         {
             if(m_outputStream) {
+                //if(m_runLoop) {
+                //    [NSOS(m_outputStream) removeFromRunLoop:NSRL(m_runLoop) forMode:NSDefaultRunLoopMode];
+                //}
                 [NSOS(m_outputStream) close];
                 [NSOS(m_outputStream) release];
                 m_outputStream = nullptr;
             }
             if(m_inputStream) {
+                //if(m_runLoop) {
+                //    [NSOS(m_inputStream) removeFromRunLoop:NSRL(m_runLoop) forMode:NSDefaultRunLoopMode];
+                //}
                 [NSIS(m_inputStream) close];
                 [NSIS(m_inputStream) release];
                 m_inputStream = nullptr;

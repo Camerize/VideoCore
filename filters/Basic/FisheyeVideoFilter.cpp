@@ -1,5 +1,5 @@
 
-#include <videocore/filters/Basic/GrayscaleVideoFilter.h>
+#include <videocore/filters/Basic/FisheyeVideoFilter.h>
 
 #include <TargetConditionals.h>
 
@@ -15,28 +15,28 @@
 
 namespace videocore { namespace filters {
  
-    bool GrayscaleVideoFilter::s_registered = GrayscaleVideoFilter::registerFilter();
+    bool FisheyeVideoFilter::s_registered = FisheyeVideoFilter::registerFilter();
     
     bool
-    GrayscaleVideoFilter::registerFilter()
+    FisheyeVideoFilter::registerFilter()
     {
-        FilterFactory::_register("com.videocore.filters.grayscale", []() { return new GrayscaleVideoFilter(); });
+        FilterFactory::_register("com.videocore.filters.fisheye", []() { return new FisheyeVideoFilter(); });
         return true;
     }
     
-    GrayscaleVideoFilter::GrayscaleVideoFilter()
+    FisheyeVideoFilter::FisheyeVideoFilter()
     : IVideoFilter(), m_initialized(false), m_bound(false)
     {
         
     }
-    GrayscaleVideoFilter::~GrayscaleVideoFilter()
+    FisheyeVideoFilter::~FisheyeVideoFilter()
     {
         glDeleteProgram(m_program);
-        glDeleteVertexArraysOES(1, &m_vao);
+        glDeleteVertexArrays(1, &m_vao);
     }
     
     const char * const
-    GrayscaleVideoFilter::vertexKernel() const
+    FisheyeVideoFilter::vertexKernel() const
     {
         
         KERNEL(GL_ES2_3, m_language,
@@ -54,7 +54,7 @@ namespace videocore { namespace filters {
     }
     
     const char * const
-    GrayscaleVideoFilter::pixelKernel() const
+    FisheyeVideoFilter::pixelKernel() const
     {
         
          KERNEL(GL_ES2_3, m_language,
@@ -62,23 +62,24 @@ namespace videocore { namespace filters {
                varying vec2      vCoord;
                uniform sampler2D uTex0;
                void main(void) {
-                   vec4 color = texture2D(uTex0, vCoord);
-                   float gray = dot(color.rgb, vec3(0.3, 0.59, 0.11));
-                   gl_FragColor = vec4(gray, gray, gray, color.a);
+                   vec2 uv = vCoord - 0.5;
+                   float z = sqrt(1.0 - uv.x * uv.x - uv.y * uv.y);
+                   float a = 1.0 / (z * tan(-5.2)); // FOV
+                   gl_FragColor = texture2D(uTex0, (uv * a) + 0.5);
                }
         )
         
         return nullptr;
     }
     void
-    GrayscaleVideoFilter::initialize()
+    FisheyeVideoFilter::initialize()
     {
         switch(m_language) {
             case GL_ES2_3:
             case GL_2: {
                 setProgram(build_program(vertexKernel(), pixelKernel()));
-                glGenVertexArraysOES(1, &m_vao);
-                glBindVertexArrayOES(m_vao);
+                glGenVertexArrays(1, &m_vao);
+                glBindVertexArray(m_vao);
                 m_uMatrix = glGetUniformLocation(m_program, "uMat");
                 int attrpos = glGetAttribLocation(m_program, "aPos");
                 int attrtex = glGetAttribLocation(m_program, "aCoord");
@@ -96,7 +97,7 @@ namespace videocore { namespace filters {
         }
     }
     void
-    GrayscaleVideoFilter::bind()
+    FisheyeVideoFilter::bind()
     {
         switch(m_language) {
             case GL_ES2_3:
@@ -106,7 +107,7 @@ namespace videocore { namespace filters {
                         initialize();
                     }
                     glUseProgram(m_program);
-                    glBindVertexArrayOES(m_vao);
+                    glBindVertexArray(m_vao);
                 }
                 glUniformMatrix4fv(m_uMatrix, 1, GL_FALSE, &m_matrix[0][0]);
                 break;
@@ -115,7 +116,7 @@ namespace videocore { namespace filters {
         }
     }
     void
-    GrayscaleVideoFilter::unbind()
+    FisheyeVideoFilter::unbind()
     {
         m_bound = false;
     }
